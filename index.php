@@ -1,11 +1,10 @@
 <?php
 $title = "iSeater";
-$username = "Aline";
-include "head.php";
+require "head.php";
 ?>
 <body>
     <div id = "signinHeader">
-        <a href = "/"><img src="logo2.png" alt = "iSeater logo"></a>
+        <a href = "/"><img src="images/logo2.png" alt = "iSeater logo"></a>
     </div>
 <div id = "signinBackground">
         <div id = "signinWindow">
@@ -24,6 +23,6 @@ include "head.php";
     </div>
 </body>
 <?php
-include "footer.php";
+require "footer.php";
 
 ?>
