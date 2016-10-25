@@ -8,5 +8,6 @@
         seating charts.">
         <meta name = "keywords" content="teacher, seating chart, seat, assign seats, students">
         <link rel = "stylesheet" href = "style.css">
+        <link rel = "stylesheet" href = "menustyle.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     </head>

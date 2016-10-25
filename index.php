@@ -6,7 +6,7 @@ require "head.php";
     <div id = "signinHeader">
         <a href = "/"><img src="images/logo2.png" alt = "iSeater logo"></a>
     </div>
-<div id = "signinBackground">
+    <div id = "signinBackground">
         <div id = "signinWindow">
             <br>
             <p id = "signIn">Sign In</p>
@@ -24,5 +24,4 @@ require "head.php";
 </body>
 <?php
 require "footer.php";
-
 ?>
