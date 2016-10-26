@@ -81,37 +81,66 @@ require "menu.php";
         <br><br>
         <div class = "genderGroup">
             <div class = "genderBox">
-                <div class = "gender"></div><br>
+                <div class = "gender"><img alt="no gender" src="images/nogender.png"></div><br>
                 <span class = "genderSelection">No Restriction</span><br>
                 <input type="radio" name="gender" value="nogender" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"></div><br>
+                <div class = "gender"><img alt="girls-boys" src="images/girl boy.png"></div><br>
                 <span class = "genderSelection">Girls - Boys</span><br>
                 <input type="radio" name="gender" value="girlsboys" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"></div><br>
+                <div class = "gender"><img alt="boys-girls" src="images/boygirl.png"></div><br>
                 <span class = "genderSelection">Boys - Girls</span><br>
                 <input type="radio" name="gender" value="boysgirls" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"></div><br>
+                <div class = "gender"><img alt="alternated" src="images/everyother.png"></div><br>
                 <span class = "genderSelection">Alternated</span><br>
                 <input type="radio" name="gender" value="alternated" checked>
             </div>
         </div>
+        <br>
         <span class = "formSection">Order</span>
         <br><br>
-        <input type="radio" name="order" value="alphabetical" checked><span class = "formLabel">Alphabetical Order</span>
-        <br>
-        <input type="radio" name="order" value="byid" checked><span class = "formLabel">ID Order</span>
-        <br>
-        <input type="radio" name="order" value="random" checked><span class = "formLabel">Random Order</span>
-        <br>
-        <input type="radio" name="order" value="manual" checked><span class = "formLabel">Manual Order</span>
-        <br>
-        <input class = "submitButton" type="submit" value="Generate Chart">
+        <div class = "orderGroup">
+            <div class="orderBox">
+                <div class = "order"><img alt="alphabetical horizontal" src="images/alphabeticalhorizontal.png"></div><br>
+                <span class = "genderSelection">Alphabetical Order (Horizontal)</span><br>
+                <input type="radio" name="order" value="alphabetical" checked>
+            </div>
+            <div class="orderBox">
+                <div class = "order"><img alt="alphabetical vertical" src="images/alphabeticalvertical.png"></div><br>
+                <span class = "genderSelection">Alphabetical Order (Vertical)</span><br>
+                <input type="radio" name="order" value="alphabetical" checked>
+            </div>
+            <div class="orderBox">
+                <div class = "order"><img alt="id horizontal" src="images/idhorizontal.png"></div><br>
+                <span class = "genderSelection">ID Order (Horizontal)</span><br>
+                <input type="radio" name="order" value="byid" checked>
+            </div>
+        </div>
+        <br><br>
+        <div class = "ordergroup">
+            <div class="orderBox">
+                <div class = "order"><img alt="alphabetical horizontal" src="images/idvertical.png"></div><br>
+                <span class = "genderSelection">ID Order<br>(Vertical)</span><br>
+                <input type="radio" name="order" value="byid" checked>
+            </div>
+            <div class="orderBox">
+                <div class = "order"><img alt="alphabetical horizontal" src="images/random.png"></div><br>
+                <span class = "genderSelection">Random Order</span><br>
+                <input type="radio" name="order" value="random" checked>
+            </div>
+            <div class="orderBox">
+                <div class = "order"><img alt="alphabetical horizontal" src="images/manual.png"></div><br>
+                <span class = "genderSelection">Manual Order</span><br>
+                <input type="radio" name="order" value="manual" checked>
+            </div>
+            <br><br>
+            <input class = "submitButton" type="submit" value="Generate Chart">
+        </div>
     </form>
 </body>
 <?php
