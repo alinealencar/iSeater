@@ -9,5 +9,6 @@
         <meta name = "keywords" content="teacher, seating chart, seat, assign seats, students">
         <link rel = "stylesheet" href = "css/style.css">
         <link rel = "stylesheet" href = "css/menustyle.css">
-        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel = "stylesheet" href = "css/formstyle.css"-->
+        <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Baloo+Paaji|Raleway" rel="stylesheet">
     </head>

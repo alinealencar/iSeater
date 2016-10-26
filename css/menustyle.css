@@ -6,9 +6,11 @@ nav {
     margin-top: 1%;
     box-shadow: 10px 10px 20px #ccc;
 }
-img {
+nav img {
     float: left;
+    display: block;
     margin: 0;
+    height: 7%;
 }
 .signedin {
     float: left;

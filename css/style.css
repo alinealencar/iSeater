@@ -1,16 +1,16 @@
 #signinBackground {
-	background-image: url("images/seats.jpg");
+	background-image: url("../images/seats.jpg");
 	width: 100%;
 	height: 100%;
 	position: relative;
 }
 #signinHeader {
-
+	height: 10%;
 }
-img {
+#signinHeader img {
 	display: block;
 	margin: 1% 3%;
-	height: 7%;
+	height: 100%;
 }
 #signinWindow {
 	background:rgba(255,255,255,0.7);
@@ -32,34 +32,35 @@ img {
 	border-color: white;
 	color: white;
 	padding: 1% 3%;
-	margin-left: 45%;
+	display:block;
+	margin: 0 auto;
 	font-size: 110%;
 }
-form {
+#loginForm {
 	width: 80%;
 	margin: 0 auto;
 }
-
-label, input {
+#loginForm label, #loginForm input[type = "text"] {
 	display: inline-block;
 }
 
-label {
+#loginForm label {
 	width: 40%;
 	text-align: right;
 	font-size: 120%;
 }
 
-label + input {
+#loginForm label + input[type = "text"] {
 	width: 20%;
 	margin: 0 30% 0 3%;
 }
 
-input + input {
+#loginForm input + input[type = "text"] {
 	float: right;
 }
-input {
-	border: 1px solid black;
+#loginForm input[type = "text"] {
+	border: 1px solid #444;
+	height: 5%;
 }
 footer {
 	height: 10%;

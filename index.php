@@ -10,8 +10,7 @@ require "head.php";
         <div id = "signinWindow">
             <br>
             <p id = "signIn">Sign In</p>
-            <br>
-            <form action = "signin.php" method = "post">
+            <form id = "loginForm" action = "signin.php" method = "post">
                 <label>Username: </label><input class = "whitebg" type="text" name="username">
                 <br><br>
                 <label>Password: </label><input class = "whitebg" type = "text" name="password">

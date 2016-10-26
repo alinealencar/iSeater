@@ -1,0 +1,65 @@
+#generateChartForm {
+    margin-top: 5%;
+    text-align: center;
+}
+#generateChartForm input[type="text"] {
+    width: 8%;
+    height: 4%;
+}
+.formSection {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 200%;
+    text-align: center;
+    color: #444;
+}
+.layout {
+    height: 10%;
+    background-color: #eee;
+    border: 1px solid #444;
+    font-family: 'Baloo Paaji', cursive;
+    color: #444;
+    font-size: 150%;
+    line-height: 230%;
+    box-shadow: 5px 5px 5px #aaa;
+}
+.layoutBox{
+    display: inline-block;
+    vertical-align:top;
+    width: 20%;
+    padding: 0 5%;
+}
+.layoutGroup {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+.formLabel {
+    color: #444;
+    font-family: 'Helvetica', sans-serif;
+    padding: 2%;
+}
+.genderGroup {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.genderBox {
+    display: inline-block;
+    vertical-align:top;
+    width: 10%;
+    padding: 0 5%;
+}
+.genderBox img {
+    margin: 0 auto;
+}
+.gender {
+    height: 20%;
+    border-radius: 20%;
+    border: 1px solid #444;
+    box-shadow: 5px 5px 5px #aaa;
+}
+.genderSelection {
+    font-family: "Helvetica", sans-serif;
+    font-size: 70%;
+    color: #444;
+}
