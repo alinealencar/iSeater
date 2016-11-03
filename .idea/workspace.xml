@@ -51,13 +51,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="studentslist.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="studentslist.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/studentslist.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1172">
-              <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
+            <state relative-caret-position="479">
+              <caret line="40" column="79" selection-start-line="40" selection-start-column="79" selection-end-line="40" selection-end-column="79" />
               <folding>
-                <marker date="1478186988238" expanded="true" signature="911:976" ph="SELECT stude... Student" />
+                <marker date="1478187437592" expanded="true" signature="911:976" ph="SELECT stude... Student" />
               </folding>
             </state>
           </provider>
@@ -103,7 +103,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="head.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="head.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/head.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="561">
@@ -147,13 +147,13 @@
         <option value="$PROJECT_DIR$/css/menustyle.css" />
         <option value="$PROJECT_DIR$/generatechart.php" />
         <option value="$PROJECT_DIR$/databasetest.php" />
-        <option value="$PROJECT_DIR$/studentslist.php" />
         <option value="$PROJECT_DIR$/css/formstyle.css" />
         <option value="$PROJECT_DIR$/sorttable.js" />
         <option value="$PROJECT_DIR$/custom.css" />
         <option value="$PROJECT_DIR$/css/custom.css" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/head.php" />
+        <option value="$PROJECT_DIR$/studentslist.php" />
       </list>
     </option>
   </component>
@@ -320,12 +320,12 @@
       <workItem from="1477422363939" duration="13198000" />
       <workItem from="1477489721454" duration="3523000" />
       <workItem from="1477964064317" duration="5094000" />
-      <workItem from="1478187084613" duration="188000" />
+      <workItem from="1478187084613" duration="353000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22003000" />
+    <option name="totallyTimeSpent" value="22168000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2762" height="1770" extended-state="6" />
@@ -416,7 +416,7 @@
         <state relative-caret-position="2013">
           <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
           <folding>
-            <marker date="1478186988238" expanded="true" signature="911:976" ph="SELECT stude... Student" />
+            <marker date="1478187437592" expanded="true" signature="911:976" ph="SELECT stude... Student" />
           </folding>
         </state>
       </provider>
@@ -616,16 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/studentslist.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1172">
-          <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
-          <folding>
-            <marker date="1478186988238" expanded="true" signature="911:976" ph="SELECT stude... Student" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sorttable.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -663,6 +653,16 @@
         <state relative-caret-position="561">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/studentslist.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="40" column="79" selection-start-line="40" selection-start-column="79" selection-end-line="40" selection-end-column="79" />
+          <folding>
+            <marker date="1478187437592" expanded="true" signature="911:976" ph="SELECT stude... Student" />
+          </folding>
         </state>
       </provider>
     </entry>

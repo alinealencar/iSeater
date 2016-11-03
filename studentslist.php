@@ -38,7 +38,7 @@ $result = $conn->query($sql);
 $studentsTable = "";
 if ($result->num_rows > 0) {
     //output data of each row
-    $studentsTable .= "<table class=\"table table-striped studentsList\">";
+    $studentsTable .= "<table class=\"table table-striped studentsList sortable\">";
     $studentsTable .= "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Class</th><th>Together</th><th>Separate</th></tr>";
     while($row = $result->fetch_assoc()) {
         $studentsTable .= "<tr>";
