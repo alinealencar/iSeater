@@ -1,0 +1,17 @@
+.studentsList {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.studentsListButtons {
+    margin: 0 auto;
+    width: 43%;
+}
+
+.btn {
+    margin: 2% .5%;
+}
+
+.studentsListButtons br {
+    display: none;
+}
