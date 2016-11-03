@@ -9,7 +9,18 @@ $title = "iSeater - Students";
 require "head.php";
 require "menu.php";
 
-
+?>
+    <body>
+        <br>
+        <div class = "studentsListButtons">
+            <button type="button" class="btn btn-success">Add Student</button>
+            <button type="button" class="btn btn-danger">Remove Student</button>
+            <br>
+            <button type="button" class="btn btn-info">Add Restriction</button>
+            <button type="button" class="btn btn-warning">Remove Restriction</button>
+        </div>
+        <br>
+<?php
 $servername = "localhost";
 $username = "f6team16_admin";
 $password = "georgebrown";
@@ -48,7 +59,7 @@ else {
 }
 $conn->close();
 ?>
-
+    </body>
 <?php
 require "footer.php";
 ?>
