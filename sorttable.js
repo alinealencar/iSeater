@@ -476,6 +476,7 @@ var forEach = function(object, block, context) {
     }
 };
 
-
-
+function addStudent() {
+    document.getElementById('addStudent').style.display = "block";
+};
 
