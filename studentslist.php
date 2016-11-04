@@ -9,7 +9,33 @@ $title = "iSeater - Students";
 require "head.php";
 require "menu.php";
 
-
+?>
+    <body>
+        <br>
+        <div class = "studentsListButtons">
+            <button onclick = "addStudent()" type="button" class="btn btn-success">Add Student</button>
+            <button type="button" class="btn btn-danger">Remove Student</button>
+            <br>
+            <button type="button" class="btn btn-info">Add Restriction</button>
+            <button type="button" class="btn btn-warning">Remove Restriction</button>
+        </div>
+        <br>
+        <div id = "addStudent" style = "display: none">
+            <form method = "post">
+                <label>Student ID: </label><input type = "text" name = "studentid">
+                <br>
+                <label>First Name: </label><input type = "text" name = "firstName">
+                <br>
+                <label>Last Name: </label><input type = "text" name = "lastName">
+                <br>
+                <label>Gender: </label><input type = "text" name = "gender">
+                <br>
+                <label>Class: </label><input type = "text" name = "class">
+                <br>
+                <button type = "submit">Add Student</button>
+            </form>
+        </div>
+<?php
 $servername = "localhost";
 $username = "f6team16_admin";
 $password = "georgebrown";
@@ -27,7 +53,7 @@ $result = $conn->query($sql);
 $studentsTable = "";
 if ($result->num_rows > 0) {
     //output data of each row
-    $studentsTable .= "<table class=\"table table-striped studentsList\">";
+    $studentsTable .= "<table class=\"table table-striped studentsList sortable\">";
     $studentsTable .= "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Class</th><th>Together</th><th>Separate</th></tr>";
     while($row = $result->fetch_assoc()) {
         $studentsTable .= "<tr>";
@@ -48,7 +74,7 @@ else {
 }
 $conn->close();
 ?>
-
+    </body>
 <?php
 require "footer.php";
 ?>

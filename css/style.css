@@ -78,6 +78,9 @@ footer div p {
 	color: white;
 	padding: 5px 0;
 }
-.studentsList {
-	width: 80%;
+.sortable th.descend:after{
+	content: "\25B2";
+}
+.sortable th.ascend:after {
+	content: "\25BC";
 }

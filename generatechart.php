@@ -78,7 +78,29 @@ require "menu.php";
         <span class = "formLabel">Rows: </span><input type = "text" name = "numRows">
 
         <br><br><br><br><br>
-
+        <span class = "formLabel">Columns: </span>
+        <select>
+            <option value="0">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <span class = "formLabel">Rows: </span>
+        <select>
+            <option value="0">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <br><br><br>
         <span class = "formSection">Gender Pattern</span>
         <br><br>
         <div class = "genderGroup">
