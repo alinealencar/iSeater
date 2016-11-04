@@ -4,7 +4,7 @@ $username = "Aline";
 require "head.php";
 require "menu.php";
 ?>
-<body>
+    <body>
     <form id = "generateChartForm" action = "chartform.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class">
@@ -74,11 +74,29 @@ require "menu.php";
         <input type="radio" name="layout" value="single" checked><span class = "formLabel">Single Columns</span>
         <input type="radio" name="layout" value="double"><span class = "formLabel">Double Columns</span>
         <br><br>
-        <span class = "formLabel">Columns: </span><input type = "text" name = "numColumns">&nbsp;
-        <span class = "formLabel">Rows: </span><input type = "text" name = "numRows">
-
-        <br><br><br><br><br>
-
+        <span class = "formLabel">Columns: </span>
+        <select>
+            <option value="0">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <span class = "formLabel">Rows: </span>
+        <select>
+            <option value="0">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <br><br><br>
         <span class = "formSection">Gender Pattern</span>
         <br><br>
         <div class = "genderGroup">
@@ -88,12 +106,12 @@ require "menu.php";
                 <input type="radio" name="gender" value="nogender" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"><img alt="girls-boys" src="images/girl boy.png"></div><br>
+                <div class = "gender"></div><br>
                 <span class = "genderSelection">Girls - Boys</span><br>
                 <input type="radio" name="gender" value="girlsboys" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"><img alt="boys-girls" src="images/boygirl.png"></div><br>
+                <div class = "gender"></div><br>
                 <span class = "genderSelection">Boys - Girls</span><br>
                 <input type="radio" name="gender" value="boysgirls" checked>
             </div>
@@ -103,9 +121,7 @@ require "menu.php";
                 <input type="radio" name="gender" value="alternated" checked>
             </div>
         </div>
-
         <br><br><br><br><br>
-
         <span class = "formSection">Order</span>
         <br><br>
         <div class = "orderGroup">
@@ -148,7 +164,7 @@ require "menu.php";
             <input class = "submitButton" type="submit" value="Generate Chart">
         </div>
     </form>
-</body>
+    </body>
 <?php
 require "footer.php";
 ?>
