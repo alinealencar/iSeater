@@ -12,8 +12,10 @@
     text-align: center;
     color: #444;
 }
+.formLabel{
+    font-size: 130%;
+}
 .layout {
-    height: 10%;
     background-color: #eee;
     border: 1px solid #444;
     font-family: 'Baloo Paaji', cursive;
@@ -24,12 +26,12 @@
 }
 .layoutBox{
     display: inline-block;
-    vertical-align:top;
-    width: 20%;
+    vertical-align:center;
+    width: 25%;
     padding: 0 5%;
 }
 .layoutGroup {
-    width: 80%;
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
 }
@@ -38,56 +40,30 @@
     font-family: 'Helvetica', sans-serif;
     padding: 2%;
 }
-.genderGroup {
-    width: 100%;
+.genderGroup, .orderGroup{
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
 }
-.genderBox {
+.genderBox, .orderBox{
     display: inline-block;
-    vertical-align:top;
-    width: 10%;
+    width: 23%;
     padding: 0 5%;
 }
-.genderBox img {
-    margin: 3.5% auto;
-}
 .genderBox img, .orderbox img {
-    width: 77%;
-    height: 74%;
-}
-.gender {
+    /*width: 77%;*/
     height: 20%;
-    border-radius: 20%;
-    border: 1px solid #444;
+    max-width: 100%;
     box-shadow: 5px 5px 5px #aaa;
 }
 .genderSelection {
     font-family: "Helvetica", sans-serif;
-    font-size: 70%;
+    font-size: 100%;
     color: #444;
 }
-.order {
-    height: 20%;
-    border-radius: 20%;
-    border: 1px solid #444;
-    box-shadow: 5px 5px 5px #aaa;
+.submitButton:hover {
+    background-color: #4dd7fa;
 }
-.ordergroup{
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-.orderbox img{
-    margin: 4%;
-    margin-right: 5%;
-    margin-left: 10%;
-    text-align: left;
-    vertical-align: center;
-}
-.orderbox {
-    display: inline-block;
-    vertical-align:top;
-    width: 10%;
-    padding: 0 5%;
+.submitButton:active {
+    background-color: #006e8c;
 }
