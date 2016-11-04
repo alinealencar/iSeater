@@ -13,7 +13,7 @@ require "head.php";
             <form id = "loginForm" action = "signin.php" method = "post">
                 <label>Username: </label><input class = "whitebg" type="text" name="username">
                 <br><br>
-                <label>Password: </label><input class = "whitebg" type = "text" name="password">
+                <label>Password: </label><input class = "whitebg" type = "password" name="password">
                 <br><br>
                 <input class = "submitButton" type="submit" value="Sign In">
             </form>

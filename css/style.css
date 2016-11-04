@@ -40,7 +40,7 @@
 	width: 80%;
 	margin: 0 auto;
 }
-#loginForm label, #loginForm input[type = "text"] {
+#loginForm label, #loginForm input[type = "text"]{
 	display: inline-block;
 }
 
@@ -50,7 +50,7 @@
 	font-size: 120%;
 }
 
-#loginForm label + input[type = "text"] {
+#loginForm label + input[type = "text"], #loginForm label + input[type = "password"]{
 	width: 20%;
 	margin: 0 30% 0 3%;
 }
@@ -58,7 +58,7 @@
 #loginForm input + input[type = "text"] {
 	float: right;
 }
-#loginForm input[type = "text"] {
+#loginForm input[type = "text"], #loginForm label + input[type = "password"] {
 	border: 1px solid #444;
 	height: 5%;
 }

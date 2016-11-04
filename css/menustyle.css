@@ -15,19 +15,26 @@ nav img {
 .signedin {
     float: left;
     padding: 1% 5%;
-    font-size: 80%;
+    font-size: 100%;
 }
-.whiteFont {
+a.whiteFont {
+    color: white;
+}
+a.whiteFont:hover{
+      color: white;
+}
+a.whiteFont:visited{
     color: white;
 }
 .greyFont {
     color: #444444;
+    font-weight: bold;
 }
 .menu {
     list-style: none;
     text-align: center;
     margin: 0;
-    margin-top: 1%;
+    padding-top: 0.5%;
     line-height: 240%;
     width: 35%;
     float: right;
@@ -45,10 +52,17 @@ nav img {
 }
 .menuItem:hover {
     text-decoration: underline;
-    font-weight: 800;
 }
-.logout {
+.signout {
     padding: 2px 0.5%;
     background-color: #00a4d3;
-    border-radius: 5%;
+    border-radius: 10%;
+}
+.signout:hover {
+      background-color: #4dd7fa;
+      text-decoration: none;
+}
+.signout:active {
+    background-color: #006e8c;
+    text-decoration: none;
 }
