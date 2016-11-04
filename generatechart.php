@@ -106,12 +106,12 @@ require "menu.php";
                 <input type="radio" name="gender" value="nogender" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"><img alt="girlboy" src="images/girlboy.png.png"></div><br>
+                <div class = "gender"><img alt="girlboy" src="images/girlboy.png"></div><br>
                 <span class = "genderSelection">Girls - Boys</span><br>
                 <input type="radio" name="gender" value="girlsboys" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"><img alt="boygirl" src="images/boygirl.png.png"></div><br>
+                <div class = "gender"><img alt="boygirl" src="images/boygirl.png"></div><br>
                 <span class = "genderSelection">Boys - Girls</span><br>
                 <input type="radio" name="gender" value="boysgirls" checked>
             </div>
