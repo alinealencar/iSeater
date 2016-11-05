@@ -75,7 +75,7 @@ require "menu.php";
         <input type="radio" name="layout" value="double"><span class = "formLabel">Double Columns</span>
         <br><br>
         <span class = "formLabel">Columns: </span>
-        <select>
+        <select name="selectedColumns">
             <option value="0">-</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -86,7 +86,7 @@ require "menu.php";
             <option value="7">7</option>
         </select>
         <span class = "formLabel">Rows: </span>
-        <select>
+        <select name="selectedRows">
             <option value="0">-</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -106,12 +106,12 @@ require "menu.php";
                 <input type="radio" name="gender" value="nogender" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"></div><br>
+                <div class = "gender"><img alt="Girls - Boys" src="images/girlboyf.png"></div><br>
                 <span class = "genderSelection">Girls - Boys</span><br>
                 <input type="radio" name="gender" value="girlsboys" checked>
             </div>
             <div class = "genderBox">
-                <div class = "gender"></div><br>
+                <div class = "gender"><img alt="Boys - Girls" src="images/boygirlf.png"></div><br>
                 <span class = "genderSelection">Boys - Girls</span><br>
                 <input type="radio" name="gender" value="boysgirls" checked>
             </div>
@@ -136,14 +136,6 @@ require "menu.php";
                 <input type="radio" name="order" value="alphabetical" checked>
             </div>
             <div class="orderBox">
-                <div class = "order"><img alt="alphabetical horizontal" src="images/randomf.png"></div><br>
-                <span class = "genderSelection">Random Order<br></span><br>
-                <input type="radio" name="order" value="random" checked>
-            </div>
-        </div>
-        <br><br>
-        <div class = "ordergroup">
-            <div class="orderBox">
                 <div class = "order"><img alt="id horizontal" src="images/idhorizontalf.png"></div><br>
                 <span class = "genderSelection">ID Order<br>(Horizontal)</span><br>
                 <input type="radio" name="order" value="byid" checked>
@@ -154,15 +146,24 @@ require "menu.php";
                 <input type="radio" name="order" value="byid" checked>
             </div>
             <div class="orderBox">
+                <div class = "order"><img alt="alphabetical horizontal" src="images/randomf.png"></div><br>
+                <span class = "genderSelection">Random Order<br></span><br>
+                <input type="radio" name="order" value="random" checked>
+            </div>
+
+        <!--<br><br>
+        <div class = "ordergroup">-->
+
+        </div>   <!--<div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/manualf.png"></div><br>
                 <span class = "genderSelection">Manual Order<br></span><br>
                 <input type="radio" name="order" value="manual" checked>
-            </div>
+            </div>*/-->
 
             <br><br><br><br><br>
 
             <input class = "submitButton" type="submit" value="Generate Chart">
-        </div>
+        <!--</div>-->
     </form>
     </body>
 <?php

@@ -50,6 +50,10 @@
     width: 23%;
     padding: 0 5%;
 }
+.orderBox{
+    padding: 0 0%;
+    width: 18%
+}
 .genderBox img, .orderbox img {
     /*width: 77%;*/
     height: 20%;
