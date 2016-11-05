@@ -1,5 +1,5 @@
 
-var stIsIE = /*@cc_on!@*/false;
+var stIsIE = false;
 
 sorttable = {
     init: function() {
@@ -24,21 +24,15 @@ sorttable = {
 
     makeSortable: function(table) {
         if (table.getElementsByTagName('thead').length == 0) {
-            // table doesn't have a tHead. Since it should have, create one and
-            // put the first table row in it.
             the = document.createElement('thead');
             the.appendChild(table.rows[0]);
             table.insertBefore(the,table.firstChild);
         }
-        // Safari doesn't support table.tHead, sigh
+        // Safari doesn't support table.tHead
         if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
 
         if (table.tHead.rows.length != 1) return; // can't cope with two header rows
 
-        // Sorttable v1 put rows with a class of "sortbottom" at the bottom (as
-        // "total" rows, for example). This is B&R, since what you're supposed
-        // to do is put them in a tfoot. So, if there are sortbottom rows,
-        // for backwards compatibility, move them to tfoot (creating it if needed).
         sortbottomrows = [];
         for (var i=0; i<table.rows.length; i++) {
             if (table.rows[i].className.search(/\bsortbottom\b/) != -1) {
@@ -120,19 +114,13 @@ sorttable = {
                     sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
                     this.appendChild(sortfwdind);
 
-                    // build an array to sort. This is a Schwartzian transform thing,
-                    // i.e., we "decorate" each row with the actual sort key,
-                    // sort based on the sort keys, and then put the rows back in order
-                    // which is a lot faster because you only do getInnerText once per row
                     row_array = [];
                     col = this.sorttable_columnindex;
                     rows = this.sorttable_tbody.rows;
                     for (var j=0; j<rows.length; j++) {
                         row_array[row_array.length] = [sorttable.getInnerText(rows[j].cells[col]), rows[j]];
                     }
-                    /* If you want a stable sort, uncomment the following line */
-                    //sorttable.shaker_sort(row_array, this.sorttable_sortfunction);
-                    /* and comment out this one */
+
                     row_array.sort(this.sorttable_sortfunction);
 
                     tb = this.sorttable_tbody;
@@ -155,9 +143,7 @@ sorttable = {
                 if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
                     return sorttable.sort_numeric;
                 }
-                // check for a date: dd/mm/yyyy or dd/mm/yy
-                // can have / or . or - as separator
-                // can be mm/dd as well
+
                 possdate = text.match(sorttable.DATE_RE)
                 if (possdate) {
                     // looks like a date
@@ -316,28 +302,10 @@ sorttable = {
     }
 }
 
-/* ******************************************************************
- Supporting functions: bundled here to avoid depending on a library
- ****************************************************************** */
-
-// Dean Edwards/Matthias Miller/John Resig
-
 /* for Mozilla/Opera9 */
 if (document.addEventListener) {
     document.addEventListener("DOMContentLoaded", sorttable.init, false);
 }
-
-/* for Internet Explorer */
-/*@cc_on @*/
-/*@if (@_win32)
- document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
- var script = document.getElementById("__ie_onload");
- script.onreadystatechange = function() {
- if (this.readyState == "complete") {
- sorttable.init(); // call the onload handler
- }
- };
- /*@end @*/
 
 /* for Safari */
 if (/WebKit/i.test(navigator.userAgent)) { // sniff
@@ -351,10 +319,6 @@ if (/WebKit/i.test(navigator.userAgent)) { // sniff
 /* for other browsers */
 window.onload = sorttable.init;
 
-// written by Dean Edwards, 2005
-// with input from Tino Zijdel, Matthias Miller, Diego Perini
-
-// http://dean.edwards.name/weblog/2005/10/add-event/
 
 function dean_addEvent(element, type, handler) {
     if (element.addEventListener) {
@@ -422,13 +386,6 @@ fixEvent.stopPropagation = function() {
     this.cancelBubble = true;
 }
 
-// Dean's forEach: http://dean.edwards.name/base/forEach.js
-/*
- forEach, version 1.0
- Copyright 2006, Dean Edwards
- License: http://www.opensource.org/licenses/mit-license.php
- */
-
 // array-like enumeration
 if (!Array.forEach) { // mozilla already supports this
     Array.forEach = function(array, block, context) {
@@ -476,7 +433,10 @@ var forEach = function(object, block, context) {
     }
 };
 
-function addStudent() {
-    document.getElementById('addStudent').style.display = "block";
+function showForm(elementId) {
+    document.getElementById("addStudent").style.display = "none";
+    document.getElementById("removeStudent").style.display = "none";
+    document.getElementById("addRestriction").style.display = "none";
+    document.getElementById("removeRestriction").style.display = "none";
+    document.getElementById(elementId).style.display = "block";
 };
-
