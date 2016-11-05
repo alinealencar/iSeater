@@ -1,17 +1,28 @@
 <?php
 $title = "iSeater - Generate Chart";
 $user = "Aline";
+require "databaseConnection.php";
 require "head.php";
 ?>
     <body>
     <?php require "menu.php"; ?>
     <form id = "generateChartForm" action = "chartform.php" method = "post">
         <span class = "formLabel">Select a class: </span>
-        <select name="class">
-            <option value="1">1st grade</option>
+            <?php
+            $selectClasses = "SELECT DISTINCT Class FROM Student";
+            $classes = $conn->query($selectClasses);
+            $dropdownOptions = "<select name=\"class\">";
+            if ($classes->num_rows > 0) {
+                while($classOption = $classes->fetch_assoc()){
+                    $dropdownOptions .= "<option value = '".$classOption['Class']."'>".$classOption['Class']."</option>";
+                }
+                $dropdownOptions .= "</select>";
+                echo $dropdownOptions;
+            }
+            ?>
+            <!--option value="1">1st grade</option>
             <option value="2">2nd grade</option>
-            <option value="3">3rd grade</option>
-        </select>
+            <option value="3">3rd grade</option-->
         <br><br><br><br>
 
         <span class = "formSection">Layout</span>

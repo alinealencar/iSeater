@@ -54,10 +54,10 @@
     padding: 0 0%;
     width: 18%
 }
-.genderBox img, .orderbox img {
-    /*width: 77%;*/
+.genderBox img, .orderBox img {
+    width: 77%;
     height: 20%;
-    max-width: 100%;
+    /*max-width: 100%;*/
     box-shadow: 5px 5px 5px #aaa;
 }
 .genderSelection {
