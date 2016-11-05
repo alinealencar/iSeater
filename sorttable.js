@@ -475,3 +475,11 @@ var forEach = function(object, block, context) {
         resolve.forEach(object, block, context);
     }
 };
+
+function showForm(elementId) {
+    document.getElementById("addStudent").style.display = "none";
+    document.getElementById("removeStudent").style.display = "none";
+    document.getElementById("addRestriction").style.display = "none";
+    document.getElementById("removeRestriction").style.display = "none";
+    document.getElementById(elementId).style.display = "block";
+};

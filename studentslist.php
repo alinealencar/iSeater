@@ -6,15 +6,6 @@ require "head.php";
 ?>
     <body>
     <?php require "menu.php"; ?>
-        <script>
-            function showForm(elementId) {
-                document.getElementById("addStudent").style.display = "none";
-                document.getElementById("removeStudent").style.display = "none";
-                document.getElementById("addRestriction").style.display = "none";
-                document.getElementById("removeRestriction").style.display = "none";
-                document.getElementById(elementId).style.display = "block";
-            };
-        </script>
         <br>
         <div class = "studentsListButtons">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
