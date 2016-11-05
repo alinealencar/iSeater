@@ -1,12 +1,11 @@
 <?php
-require "databaseconnection.php";
 
 $title = "iSeater - Students";
 
 require "head.php";
-require "menu.php";
 ?>
     <body>
+    <?php require "menu.php"; ?>
         <script>
             function showForm(elementId) {
                 document.getElementById("addStudent").style.display = "none";
@@ -70,6 +69,16 @@ require "menu.php";
             </form>
         </div>
 <?php
+$servername = "localhost";
+$username = "f6team16_admin";
+$password = "georgebrown";
+$dbname = "f6team16_iseaterdb";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+};
 
 $sql = "SELECT studentID, FirstName, LastName, Gender, Class FROM Student";
 $result = $conn->query($sql);

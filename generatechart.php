@@ -2,9 +2,9 @@
 $title = "iSeater - Generate Chart";
 $user = "Aline";
 require "head.php";
-require "menu.php";
 ?>
     <body>
+    <?php require "menu.php"; ?>
     <form id = "generateChartForm" action = "chartform.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class">
