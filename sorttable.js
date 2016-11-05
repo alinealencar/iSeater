@@ -475,8 +475,3 @@ var forEach = function(object, block, context) {
         resolve.forEach(object, block, context);
     }
 };
-
-function addStudent() {
-    document.getElementById('addStudent').style.display = "block";
-};
-

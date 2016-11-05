@@ -1,6 +1,6 @@
 <?php
 $title = "iSeater - Generate Chart";
-$username = "Aline";
+$user = "Aline";
 require "head.php";
 require "menu.php";
 ?>
