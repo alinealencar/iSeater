@@ -6,11 +6,11 @@ nav {
     margin-top: 1%;
     box-shadow: 10px 10px 20px #ccc;
 }
-nav img {
+nav #logo {
+    height: 7%;
     float: left;
     display: block;
     margin: 0;
-    height: 7%;
 }
 .signedin {
     float: left;
@@ -59,8 +59,8 @@ a.whiteFont:visited{
     border-radius: 10%;
 }
 .signout:hover {
-      background-color: #4dd7fa;
-      text-decoration: none;
+    background-color: #4dd7fa;
+    text-decoration: none;
 }
 .signout:active {
     background-color: #006e8c;
