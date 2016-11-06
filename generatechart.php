@@ -6,7 +6,7 @@ require "head.php";
 ?>
     <body>
     <?php require "menu.php"; ?>
-    <form id = "generateChartForm" action = "chartform.php" method = "post">
+    <form id = "generateChartForm" action = "processGenerateChart.php" method = "post">
         <span class = "formLabel">Select a class: </span>
             <?php
             $selectClasses = "SELECT DISTINCT Class FROM Student";
@@ -20,9 +20,6 @@ require "head.php";
                 echo $dropdownOptions;
             }
             ?>
-            <!--option value="1">1st grade</option>
-            <option value="2">2nd grade</option>
-            <option value="3">3rd grade</option-->
         <br><br><br><br>
 
         <span class = "formSection">Layout</span>
@@ -139,22 +136,22 @@ require "head.php";
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/alphabeticalhorizontalf.png"></div><br>
                 <span class = "genderSelection">Alphabetical Order<br>(Horizontal)</span><br>
-                <input type="radio" name="order" value="alphabetical" checked>
+                <input type="radio" name="order" value="alphabeticalHorizontal" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical vertical" src="images/alphabeticalverticalf.png"></div><br>
                 <span class = "genderSelection">Alphabetical Order<br>(Vertical)</span><br>
-                <input type="radio" name="order" value="alphabetical" checked>
+                <input type="radio" name="order" value="alphabeticalVertical" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="id horizontal" src="images/idhorizontalf.png"></div><br>
                 <span class = "genderSelection">ID Order<br>(Horizontal)</span><br>
-                <input type="radio" name="order" value="byid" checked>
+                <input type="radio" name="order" value="byidHorizontal" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/idverticalf.png"></div><br>
                 <span class = "genderSelection">ID Order<br>(Vertical)</span><br>
-                <input type="radio" name="order" value="byid" checked>
+                <input type="radio" name="order" value="byidVertical" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/randomf.png"></div><br>
@@ -173,7 +170,7 @@ require "head.php";
 
             <br><br><br><br><br>
 
-            <input class = "submitButton" type="submit" value="Generate Chart">
+            <input name = "generateChart" class = "submitButton" type="submit" value="Generate Chart">
         <!--</div>-->
     </form>
     </body>
