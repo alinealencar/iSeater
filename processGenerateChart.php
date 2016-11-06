@@ -25,6 +25,16 @@ if(isset($_POST['generateChart']))
             if(isset($_POST['order'])) {
                 $order = $_POST['order'];
                 if ($order == "alphabeticalHorizontal") {
+                    function compare($a, $b)
+                    {
+                        return strcmp($a['LastName'], $b['LastName']);
+                    }
+
+                    usort($classroomNoGender, "compare");
+                    for($i = 0; $i < sizeof($classroomNoGender); $i++)
+                        echo $classroomNoGender[$i]['LastName']."<br>";
+
+
                 }
                 else if ($order == "alphabeticalVertical") {
                 }
@@ -85,7 +95,6 @@ if(isset($_POST['generateChart']))
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the girls-boys pattern
-
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
@@ -133,7 +142,6 @@ if(isset($_POST['generateChart']))
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the girls-boys pattern
-
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
