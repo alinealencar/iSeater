@@ -46,8 +46,6 @@ if(isset($_POST['generateChart']))
                                 echo "<br>";
                         }
                     }
-
-
                 }
 
                 /* ARRANGE ALPHABETICALLY AND VERTICALLY*/
@@ -112,12 +110,74 @@ if(isset($_POST['generateChart']))
 
             if(isset($_POST['order'])){
                 $order = $_POST['order'];
+                /* ALPHABETICALLY AND HORIZONTALLY ARRANGED */
                 if($order == "alphabeticalHorizontal"){
+                    $boysAlphabetically = sortAlphabetically($genderSorted[0]);
+                    $girlsAlphabetically = sortAlphabetically($genderSorted[1]);
+
+                    $girlsArrayIndex = 0;
+                    $boysArrayIndex = 0;
+
+                    //Populate the empty $classLayout array with the students
+                    for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                            if($col % 2 == 0){
+                                $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                $girlsArrayIndex++;
+                            }
+                            else {
+                                $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                $boysArrayIndex++;
+                            }
+                        }
+                    }
+
+                    //show result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
                 }
                 else if($order == "alphabeticalVertical"){
+
                 }
                 else if($order == "byidHorizontal"){
+                    $boysById = sortByStudentId($genderSorted[0]);
+                    $girlsById = sortByStudentId($genderSorted[1]);
+                    var_dump($boysById);
+                    echo "<hr>";
+                    var_dump($girlsById);
 
+                    $girlsArrayIndex = 0;
+                    $boysArrayIndex = 0;
+
+                    //Populate the empty $classLayout array with the students
+                    for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                            if($col % 2 == 0){
+                                $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                $girlsArrayIndex++;
+                            }
+                            else {
+                                $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                $boysArrayIndex++;
+                            }
+                        }
+                    }
+
+                    //show result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
                 }
                 else if($order == "byidVertical"){
 
@@ -338,22 +398,24 @@ function getStudents(){
     return $classroom;
 }
 
-//function to sort an array alphabetically by the Last Name
+//functions to sort an array alphabetically by the Last Name
+function compareLastName($a, $b)
+{
+    return strcmp($a[LastName], $b[LastName]);
+}
+
+function compareStudentId($a, $b)
+{
+    return strcmp($a[StudentID], $b[StudentID]);
+}
+
 function sortAlphabetically($inputArray){
-    function compare($a, $b)
-    {
-        return strcmp($a[LastName], $b[LastName]);
-    }
-    usort($inputArray, "compare");
+    usort($inputArray, "compareLastName");
     return $inputArray;
 }
 
 //function to sort an array by the studentid
 function sortByStudentId($inputArray){
-    function compare($a, $b)
-    {
-        return strcmp($a[StudentID], $b[StudentID]);
-    }
-    usort($inputArray, "compare");
+    usort($inputArray, "compareStudentID");
     return $inputArray;
 }
