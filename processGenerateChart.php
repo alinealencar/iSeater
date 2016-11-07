@@ -143,7 +143,35 @@ if(isset($_POST['generateChart']))
                     }
                 }
                 else if($order == "alphabeticalVertical"){
+                    $boysByLastName = sortAlphabetically($genderSorted[0]);
+                    $girlsByLastName = sortAlphabetically($genderSorted[1]);
 
+                    $girlsArrayIndex = 0;
+                    $boysArrayIndex = 0;
+
+                    //Populate the empty $classLayout array with the students
+                    for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                        for($row = sizeof($classLayout) - 1; $row >= 0; $row--){
+                            if($col % 2 == 0){
+                                $classLayout[$row][$col] = $girlsByLastName[$girlsArrayIndex];
+                                $girlsArrayIndex++;
+                            }
+                            else {
+                                $classLayout[$row][$col] = $boysByLastName[$boysArrayIndex];
+                                $boysArrayIndex++;
+                            }
+                        }
+                    }
+
+                    //show result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
                 }
                 else if($order == "byidHorizontal"){
                     $boysById = sortByStudentId($genderSorted[0]);
