@@ -222,35 +222,6 @@ if(isset($_POST['generateChart']))
             if(isset($_POST['order'])){
                 $order = $_POST['order'];
                 if($order == "alphabeticalHorizontal"){
-                    $boysAlphabetically = sortAlphabetically($genderSorted[0]);
-                    $girlsAlphabetically = sortAlphabetically($genderSorted[1]);
-
-                    $girlsArrayIndex = 0;
-                    $boysArrayIndex = 0;
-
-                    //Populate the empty $classLayout array with the students
-                    for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                            if($col % 2 == 0){
-                                $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                $boysArrayIndex++;
-                            }
-                            else {
-                                $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                $girlsArrayIndex++;
-                            }
-                        }
-                    }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "alphabeticalVertical"){
                 }
