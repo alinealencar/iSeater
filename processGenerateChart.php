@@ -51,6 +51,28 @@ if(isset($_POST['generateChart']))
                 /* ARRANGE ALPHABETICALLY AND VERTICALLY*/
                 else if ($order == "alphabeticalVertical") {
                     $classroomByLastName = sortAlphabetically($classroomNoGender);
+
+                    $classroomByLastName = sortAlphabetically($classroomNoGender);
+                    $classroomByLastNameIndex = 0;
+                    //Populate the empty $classLayout array with the students
+                    for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            $classLayout[$row][$col] = $classroomByLastName[$classroomByLastNameIndex];
+                            //echo $classroomByLastName[$classroomByLastNameIndex]['LastName']."<br><hr>";
+                            $classroomByLastNameIndex++;
+
+                        }
+                    }
+
+                    //show result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["LastName"]." ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
                 }
 
                 /* ARRANGE BY ASCENDING ORDER OF THE STUDENT ID AND HORIZONTALLY*/
@@ -63,7 +85,6 @@ if(isset($_POST['generateChart']))
                     for($row = sizeof($classLayout)-1; $row >= 0; $row--){
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                             $classLayout[$row][$col] = $classroomById[$classroomByIdIndex];
-                            echo $classroomById[$classroomByIdIndex]['StudentID']."<br><hr>";
                             $classroomByIdIndex++;
                         }
                     }
@@ -82,8 +103,27 @@ if(isset($_POST['generateChart']))
 
                 /* ARRANGE BY ASCENDING ORDER OF THE STUDENT ID AND VERTICALLY*/
                 else if ($order == "byidVertical") {
+                    //sort students in a 1-dimensional array by ascending order of student ids
+                    $classroomById = sortByStudentId($classroomNoGender);
 
+                    $classroomByIdIndex = 0;
+                    //Populate the empty $classLayout array with the students
+                    for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            $classLayout[$row][$col] = $classroomById[$classroomByIdIndex];
+                            $classroomByIdIndex++;
+                        }
+                    }
 
+                    //show result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["StudentID"]." ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
                 }
 
                 /* ARRANGE RANDOMLY */
