@@ -14,6 +14,15 @@ if(isset($_POST['generateChart']))
     //1-dimensional array with all the students in the selected class
     $classroomNoGender = getStudents();
 
+    //check if number of students and number of seats are compatible
+    if(sizeof($classroomNoGender) > (sizeof($classLayout) * sizeof($classLayout[0]))){
+        echo "Class ".$classroomNoGender[0]['Class']." has ".sizeof($classroomNoGender)." students and the chosen
+        classroom only has ".(sizeof($classLayout)*sizeof($classLayout[0]))." seats. Please choose another layout.";
+
+        //sleep(3); //stops execution for 3 seconds
+
+        exit; //stops execution of the program
+    }
 
     if(isset($_POST['gender'])){
         $genderPattern = $_POST['gender'];
@@ -36,7 +45,6 @@ if(isset($_POST['generateChart']))
 
                         }
                     }
-
                     //show result
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
@@ -50,8 +58,6 @@ if(isset($_POST['generateChart']))
 
                 /* ARRANGE ALPHABETICALLY AND VERTICALLY*/
                 else if ($order == "alphabeticalVertical") {
-                    $classroomByLastName = sortAlphabetically($classroomNoGender);
-
                     $classroomByLastName = sortAlphabetically($classroomNoGender);
                     $classroomByLastNameIndex = 0;
                     //Populate the empty $classLayout array with the students
@@ -703,15 +709,72 @@ function separateByGender($inputArray){
 //add the students from a class into the layout of the classroom
 function generateClassLayout(){
     $classroomLayout = [];
+
+    //if statements to check which classroom layout was chosen
     if($_POST['layout'] == "fivesix") {
         $rows = 6;
-        $columns = 5;
+        $cols = 5;
     }
-
+    elseif ($_POST['layout'] == "fiveseven")
+    {
+        $rows = 7;
+        $cols = 5;
+    }
+    elseif ($_POST['layout'] == "fiveeight")
+    {
+        $rows =  8;
+        $cols =  5;
+    }
+    elseif ($_POST['layout'] == "sixfive")
+    {
+        $rows =  5;
+        $cols =  6;
+    }
+    elseif ($_POST['layout'] == "sixsix")
+    {
+        $rows =  6;
+        $cols =  6;
+    }
+    elseif ($_POST['layout'] == "sixseven")
+    {
+        $rows =  7;
+        $cols =  6;
+    }
+    elseif ($_POST['layout'] == "threesix")
+    {
+        $rows =  6;
+        $cols =  2;
+    }
+    elseif ($_POST['layout'] == "fourfour")
+    {
+        $rows =  4;
+        $cols =  8;
+    }
+    elseif ($_POST['layout'] == "fourfive")
+    {
+        $rows =  5;
+        $cols =  8;
+    }
+    elseif ($_POST['layout'] == "single")
+    {
+        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
+        {
+            $rows = $_POST['selectedRows'];
+            $cols = $_POST['selectedColumns'];
+        }
+    }
+    elseif ($_POST['layout'] == "double")
+    {
+        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
+        {
+            $rows = $_POST['selectedRows'];
+            $cols = $_POST['selectedColumns'];
+        }
+    }
     //create a two dimensional array ($rows rows and $columns columns)
     for($i = 0; $i < $rows; $i ++){
             //all the elements of this array are empty strings ""
-            $classroomLayout[] = array_fill(0, $columns, "");
+            $classroomLayout[] = array_fill(0, $cols, "");
     }
 
     return $classroomLayout;
@@ -720,7 +783,9 @@ function generateClassLayout(){
 function getStudents(){
     global $conn; //access outer variable
     $selectedClass = $_POST['class'];
+    //query to get all rows of the selectedClass
     $classQuery = "SELECT * FROM Student WHERE Class = '$selectedClass'";
+    //run query
     $class = $conn->query($classQuery);
 
     $classroom = [];
