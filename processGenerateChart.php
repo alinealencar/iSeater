@@ -18,12 +18,12 @@ if(isset($_POST['generateChart']))
     if(isset($_POST['gender'])){
         $genderPattern = $_POST['gender'];
 
+        /* NO GENDER PATTERN */
         if($genderPattern == "nogender"){
-            //1 dimensional array with all the students in the selected class
-
-
             if(isset($_POST['order'])) {
                 $order = $_POST['order'];
+
+                /* ARRANGE ALPHABETICALLY AND HORIZONTALLY*/
                 if ($order == "alphabeticalHorizontal") {
                     $classroomByLastName = sortAlphabetically($classroomNoGender);
                     $classroomByLastNameIndex = 0;
@@ -49,9 +49,13 @@ if(isset($_POST['generateChart']))
 
 
                 }
+
+                /* ARRANGE ALPHABETICALLY AND VERTICALLY*/
                 else if ($order == "alphabeticalVertical") {
                     $classroomByLastName = sortAlphabetically($classroomNoGender);
                 }
+
+                /* ARRANGE BY ASCENDING ORDER OF THE STUDENT ID AND HORIZONTALLY*/
                 else if ($order == "byidHorizontal") {
                     //sort students in a 1-dimensional array by ascending order of student ids
                     $classroomById = sortByStudentId($classroomNoGender);
@@ -77,10 +81,14 @@ if(isset($_POST['generateChart']))
                     }
 
                 }
+
+                /* ARRANGE BY ASCENDING ORDER OF THE STUDENT ID AND VERTICALLY*/
                 else if ($order == "byidVertical") {
                     $classroomById = sortByStudentId($classroomNoGender);
 
                 }
+
+                /* ARRANGE RANDOMLY */
                 else if ($order == "random") {
                     //shuffle all the students
                     shuffle($classroomNoGender);
@@ -96,6 +104,8 @@ if(isset($_POST['generateChart']))
                 }
             }
         }
+
+        /* ARRANGE VERTICALLY WITH GIRLS ON THE LEFTMOST COLUMN */
         else if($genderPattern == "girlsboys"){
             //$genderSorted holds 2 arrays: one with girls only and another one with boys only
             $genderSorted = separateByGender($classroomNoGender);
@@ -143,6 +153,8 @@ if(isset($_POST['generateChart']))
                 }
             }
         }
+
+        /* ARRANGE VERTICALLY WITH BOYS ON THE LEFTMOST COLUMN */
         else if($genderPattern == "boysgirls"){
             //$genderSorted holds 2 arrays: one with girls only and another one with boys only
             $genderSorted = separateByGender($classroomNoGender);
@@ -178,7 +190,7 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //$classLayout is an array rowsxcolumns ordered randomly with the girls-boys pattern
+                    //$classLayout is an array rowsxcolumns ordered randomly with the boys-girls pattern
                     //show classLayout result
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
@@ -192,8 +204,58 @@ if(isset($_POST['generateChart']))
             }
 
         }
-        else if($genderPattern == "alternated"){
 
+        /* ARRANGE WITH BOYS AND GIRLS IN ALTERNATED ORDER */
+        else if($genderPattern == "alternated"){
+            $genderSorted = separateByGender($classroomNoGender);
+
+            if(isset($_POST['order'])){
+                $order = $_POST['order'];
+                if($order == "alphabeticalHorizontal"){
+                }
+                else if($order == "alphabeticalVertical"){
+                }
+                else if($order == "byidHorizontal"){
+
+                }
+                else if($order == "byidVertical"){
+
+                }
+                else if($order == "random"){
+                    //shuffle the students around the array to make sure the result is going to be truly random
+                    shuffleArray($genderSorted);
+
+                    $boysArrayIndex = 0;
+                    $girlsArrayIndex = 0;
+                    //$counter controls if we're getting a girl or a boy (odd for boys, even for girls)
+                    $counter = 0;
+                    for($rows = 0; $rows < sizeof($classLayout); $rows++){
+                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                            if($counter % 2 == 0){
+                                $classLayout[$rows][$col] = $genderSorted[0][$boysArrayIndex];
+                                $girlsArrayIndex++;
+                                $counter++;
+                            }
+                            else {
+                                $classLayout[$rows][$col] = $genderSorted[1][$girlsArrayIndex];
+                                $boysArrayIndex++;
+                                $counter++;
+                            }
+                        }
+                    }
+
+                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
+                    //show classLayout result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["Gender"];
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
+                }
+            }
         }
     }
 }
