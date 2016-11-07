@@ -512,7 +512,39 @@ if(isset($_POST['generateChart']))
                     }
                 }
                 else if($order == "byidVertical"){
+                    $boysById = sortByStudentId($genderSorted[0]);
+                    $girlsById = sortByStudentId($genderSorted[1]);
 
+                    $girlsArrayIndex = 0;
+                    $boysArrayIndex = 0;
+
+                    $counter = 0;
+
+                    for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            if($counter % 2 == 0){
+                                $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                $boysArrayIndex++;
+                                $counter++;
+                            }
+                            else {
+                                $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                $girlsArrayIndex++;
+                                $counter++;
+                            }
+                        }
+                    }
+
+                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
+                    //show classLayout result
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
+                        }
+                    }
                 }
                 else if($order == "random"){
                     //shuffle the students around the array to make sure the result is going to be truly random
