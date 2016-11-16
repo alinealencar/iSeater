@@ -9,20 +9,26 @@ require "head.php";
         <script>
             function showForm(elementId) {
                 //hide all the forms
-                document.getElementById("addStudent").style.display = "none";
-                document.getElementById("removeStudent").style.display = "none";
-                document.getElementById("addRestriction").style.display = "none";
-                document.getElementById("removeRestriction").style.display = "none";
+                //document.getElementById("addStudent").style.display = "none";
+                //document.getElementById("removeStudent").style.display = "none";
+                //document.getElementById("addRestriction").style.display = "none";
+                //document.getElementById("removeRestriction").style.display = "none";
                 //show the selected form
-                document.getElementById(elementId).style.display = "block";
+                //document.getElementById(elementId).style.display = "block";
+                $(".addRemoveForm").toggle();
             };
+
+            function removeStudent() {
+                $(".glyphicon-trash").toggle();
+
+            }
         </script>
         <br>
         <div class = "studentsListButtons">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
-            <button onclick = "showForm('removeStudent')" type="button" class="btn btn-danger">Remove Student</button>
-            <button onclick = "showForm('addRestriction')" type="button" class="btn btn-info">Add Restriction</button>
-            <button onclick = "showForm('removeRestriction')" type="button" class="btn btn-warning">Remove Restriction</button>
+            <button onclick = "removeStudent()" type="button" class="btn btn-danger">Remove Student</button>
+            <button onclick = "addRestriction()" type="button" class="btn btn-info">Add Restriction</button>
+            <button onclick = "" type="button" class="btn btn-warning">Remove Restriction</button>
         </div>
         <br>
         <div class = "addRemoveForm" id = "addStudent" style = "display: none">
@@ -41,7 +47,7 @@ require "head.php";
                 <input name = "addStudentSubmit" type = "submit" value = "Add Student">
             </form>
         </div>
-        <div class = "addRemoveForm" id = "removeStudent" style = "display: none">
+        <!--div class = "addRemoveForm" id = "removeStudent" style = "display: none">
             <form method = "post">
                 <p>Remove Student</p>
                 <label>Student ID:&nbsp;</label><input type = "text" name = "studentid">
@@ -74,8 +80,9 @@ require "head.php";
                 <br><br>
                 <input name = "removeRestrictionSubmit" type = "submit" value = "Remove Restriction">
             </form>
-        </div>
+        </div-->
         <br><br>
+
 <?php
 $selectData = "SELECT studentID, FirstName, LastName, Gender, Class, Together, Separate FROM Student";
 $result = $conn->query($selectData);
@@ -84,9 +91,21 @@ $studentsTable = "";
 if ($result->num_rows > 0) {
     //output data of each row
     $studentsTable .= "<table class=\"table table-striped studentsList sortable\">";
-    $studentsTable .= "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Class</th><th>Together</th><th>Separate</th></tr>";
+    $studentsTable .= "<tr>
+                <th class = \"checkboxColumn\">
+                    <span style = \"display: none; color: red;\" class = \"glyphicon glyphicon-trash\"></span>
+                </th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>Together</th>
+                <th>Separate</th>
+                </tr>";
     while($row = $result->fetch_assoc()) {
         $studentsTable .= "<tr>";
+        $studentsTable .= "<td class = \"checkboxColumn\"><input type = \"checkbox\" name = \"checkbox\"</td>";
         $studentsTable .= "<td>".$row["studentID"]."</td>";
         $studentsTable .= "<td>".$row["FirstName"]."</td>";
         $studentsTable .= "<td>".$row["LastName"]."</td>";
