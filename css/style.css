@@ -119,3 +119,7 @@ footer div p {
     text-align: left;
     display: inline-block;
 }
+.addRestriction {
+    color: #00a4d3;
+    text-align: center;
+}

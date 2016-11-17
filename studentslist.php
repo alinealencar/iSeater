@@ -19,8 +19,10 @@ require "head.php";
             };
 
             function removeStudent() {
-                $(".glyphicon-trash").toggle();
-
+                //show and hide the column to remove students
+                //when the user clicks on the remove student button, the column appears
+                //when they click it again, the column is hidden
+                $(".checkboxColumn").toggle();
             }
         </script>
         <br>
@@ -84,38 +86,46 @@ require "head.php";
         <br><br>
 
 <?php
-$selectData = "SELECT UserID, FirstName, LastName, Gender, Class, Together, Separate FROM IS_User";
+$selectData = "SELECT * FROM IS_User";
 $result = $conn->query($selectData);
-var_dump($selectData);
+
 $studentsTable = "";
 if ($result->num_rows > 0) {
     //output data of each row
-    $studentsTable .= "<table class=\"table table-striped studentsList sortable\">";
+    $studentsTable .= "<form id = 'deleteStudent' action = 'deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable'>";
     $studentsTable .= "<tr>
-                <th class = \"checkboxColumn\">
-                    <span style = \"display: none; color: red;\" class = \"glyphicon glyphicon-trash\"></span>
+                <th style = 'display: none;' class = 'checkboxColumn'>
+                    <span onclick = \"document.getElementById('deleteStudent').submit();\" class = 'glyphicon glyphicon-trash'></span>
                 </th>
                 <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Gender</th>
-                <th>Class</th>
+                <th>Class</th> 
                 <th>Together</th>
                 <th>Separate</th>
                 </tr>";
     while($row = $result->fetch_assoc()) {
         $studentsTable .= "<tr>";
-        $studentsTable .= "<td class = \"checkboxColumn\"><input type = \"checkbox\" name = \"checkbox\"</td>";
+        $studentsTable .= "<td style = 'display: none;' class = 'checkboxColumn'><input type = 'checkbox' name = 'checkbox[]' value = '".$row["UserID"]."'</td>";
         $studentsTable .= "<td>".$row["UserID"]."</td>";
         $studentsTable .= "<td>".$row["FirstName"]."</td>";
         $studentsTable .= "<td>".$row["LastName"]."</td>";
         $studentsTable .= "<td>".$row["Gender"]."</td>";
         $studentsTable .= "<td>".$row["Class"]."</td>";
-        $studentsTable .= "<td>".$row["Together"]."</td>";
-        $studentsTable .= "<td>".$row["Separate"]."</td>";
+        //if you have any existing conditions, show them
+        //otherwise, show the add button
+        if(isset($row["Together"]))
+            $studentsTable .= "<td>".$row["Together"]."</td>";
+        else
+            $studentsTable .= "<td class = \"addRestriction\"><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
+        if(isset($row["Separate"]))
+            $studentsTable .= "<td>".$row["Separate"]."</td>";
+        else
+            $studentsTable .= "<td class = \"addRestriction\"><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
         $studentsTable .= "</tr>";
     }
-    $studentsTable .= "</table>";
+    $studentsTable .= "</table></form>";
     echo $studentsTable;
 }
 else {
