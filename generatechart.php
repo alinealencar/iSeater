@@ -1,10 +1,10 @@
 <?php
 $title = "iSeater - Generate Chart";
 $user = "Aline";
-require "head.php";
+require "includes/head.php";
 ?>
     <body>
-    <?php require "menu.php"; ?>
+    <?php require "includes/menu.php"; ?>
     <form id = "generateChartForm" action = "chartform.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class">
@@ -83,5 +83,5 @@ require "head.php";
     </form>
     </body>
 <?php
-require "footer.php";
+require "includes/footer.php";
 ?>

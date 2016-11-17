@@ -1,8 +1,8 @@
 <?php
 $title = "iSeater - Generate Chart";
 $username = "Aline";
-require "head.php";
-require "menu.php";
+require "includes/head.php";
+require "includes/menu.php";
 ?>
 
 
@@ -17,5 +17,5 @@ require "menu.php";
 </body>
 
 <?php
-require "footer.php";
+require "includes/footer.php";
 ?>

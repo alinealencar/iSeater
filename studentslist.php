@@ -1,11 +1,11 @@
 <?php
 
 $title = "iSeater - Students";
-require "databaseConnection.php";
-require "head.php";
+require "includes/databaseConnection.php";
+require "includes/head.php";
 ?>
     <body>
-    <?php require "menu.php"; ?>
+    <?php require "includes/menu.php"; ?>
         <script>
             function showForm(elementId) {
                 //hide all the forms
@@ -134,7 +134,7 @@ else {
 ?>
     </body>
 <?php
-require "footer.php";
+require "includes/footer.php";
 
 
 //form processing

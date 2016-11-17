@@ -1,6 +1,6 @@
 <?php
 $title = "iSeater";
-require "head.php";
+require "includes/head.php";
 ?>
 <body>
     <div id = "signinHeader">
@@ -22,5 +22,5 @@ require "head.php";
     </div>
 </body>
 <?php
-require "footer.php";
+require "includes/footer.php";
 ?>
