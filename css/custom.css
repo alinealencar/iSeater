@@ -1,0 +1,12 @@
+.studentsList{
+    width: 80%;
+    margin: 0 auto;
+}
+
+nav img {
+    float: left;
+    display: block;
+    height: 14%;
+    width: 15%;
+    padding-bottom: 3%;
+}

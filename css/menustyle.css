@@ -6,35 +6,30 @@ nav {
     margin-top: 1%;
     box-shadow: 10px 10px 20px #ccc;
 }
-nav #logo {
-    height: 7%;
+nav img {
     float: left;
     display: block;
     margin: 0;
+    height: 7%;
+    width: 12%;
+    padding-bottom: 1%;
 }
 .signedin {
     float: left;
-    padding: 1% 5%;
-    font-size: 100%;
+    padding: 1% 3%;
+    font-size: 80%;
 }
-a.whiteFont {
-    color: white;
-}
-a.whiteFont:hover{
-      color: white;
-}
-a.whiteFont:visited{
+.whiteFont {
     color: white;
 }
 .greyFont {
     color: #444444;
-    font-weight: bold;
 }
 .menu {
     list-style: none;
     text-align: center;
     margin: 0;
-    padding-top: 0.5%;
+    margin-top: 1%;
     line-height: 240%;
     width: 35%;
     float: right;
@@ -52,17 +47,10 @@ a.whiteFont:visited{
 }
 .menuItem:hover {
     text-decoration: underline;
+    font-weight: 800;
 }
 .signout {
     padding: 2px 0.5%;
     background-color: #00a4d3;
-    border-radius: 10%;
-}
-.signout:hover {
-    background-color: #4dd7fa;
-    text-decoration: none;
-}
-.signout:active {
-    background-color: #006e8c;
-    text-decoration: none;
+    border-radius: 5%;
 }

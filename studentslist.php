@@ -27,8 +27,8 @@ require "head.php";
         <div class = "studentsListButtons">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
             <button onclick = "removeStudent()" type="button" class="btn btn-danger">Remove Student</button>
-            <button onclick = "addRestriction()" type="button" class="btn btn-info">Add Restriction</button>
-            <button onclick = "" type="button" class="btn btn-warning">Remove Restriction</button>
+            <!--button onclick = "" type="button" class="btn btn-info">Add Restriction</button-->
+            <!--button onclick = "" type="button" class="btn btn-warning">Remove Restriction</button-->
         </div>
         <br>
         <div class = "addRemoveForm" id = "addStudent" style = "display: none">
@@ -84,9 +84,9 @@ require "head.php";
         <br><br>
 
 <?php
-$selectData = "SELECT studentID, FirstName, LastName, Gender, Class, Together, Separate FROM Student";
+$selectData = "SELECT UserID, FirstName, LastName, Gender, Class, Together, Separate FROM IS_User";
 $result = $conn->query($selectData);
-
+var_dump($selectData);
 $studentsTable = "";
 if ($result->num_rows > 0) {
     //output data of each row
@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $studentsTable .= "<tr>";
         $studentsTable .= "<td class = \"checkboxColumn\"><input type = \"checkbox\" name = \"checkbox\"</td>";
-        $studentsTable .= "<td>".$row["studentID"]."</td>";
+        $studentsTable .= "<td>".$row["UserID"]."</td>";
         $studentsTable .= "<td>".$row["FirstName"]."</td>";
         $studentsTable .= "<td>".$row["LastName"]."</td>";
         $studentsTable .= "<td>".$row["Gender"]."</td>";
@@ -131,11 +131,11 @@ require "footer.php";
 if(isset($_POST['addStudentSubmit']))
 {
     //query to add values into the Student table
-    $addStudent = "INSERT INTO Student (studentID, FirstName, LastName, Gender, Class) VALUES ('".$_POST['studentid']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','".$_POST['class']."')";
+    $addStudent = "INSERT INTO IS_USER (UserID, FirstName, LastName, Gender, Class) VALUES ('".$_POST['studentid']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','".$_POST['class']."')";
     //run query
     $conn->query($addStudent);
 }
-if(isset($_POST['removeStudentSubmit']))
+/*if(isset($_POST['removeStudentSubmit']))
 {
     //remove student from the Student table by using the student id
     $removeStudent = "DELETE FROM Student WHERE studentID = '".$_POST['studentid']."'";
@@ -173,7 +173,7 @@ if(isset($_POST['removeRestrictionSubmit']))
     //run queries
     $conn->query($removeRestriction1);
     $conn->query($removeRestriction2);
-}
+}*/
 //close connection
 $conn->close();
 ?>
