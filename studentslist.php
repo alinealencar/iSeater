@@ -86,7 +86,7 @@ require "includes/head.php";
         <br><br>
 
 <?php
-$selectData = "SELECT * FROM IS_User";
+$selectData = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID, IS_User_Class.Separate, IS_User_Class.Together FROM IS_User_Class INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID";
 $result = $conn->query($selectData);
 
 $studentsTable = "";
@@ -112,7 +112,7 @@ if ($result->num_rows > 0) {
         $studentsTable .= "<td>".$row["FirstName"]."</td>";
         $studentsTable .= "<td>".$row["LastName"]."</td>";
         $studentsTable .= "<td>".$row["Gender"]."</td>";
-        $studentsTable .= "<td>".$row["Class"]."</td>";
+        $studentsTable .= "<td>".$row["ClassID"]."</td>";
         //if you have any existing conditions, show them
         //otherwise, show the add button
         if(isset($row["Together"]))
