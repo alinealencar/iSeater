@@ -92,7 +92,7 @@ $result = $conn->query($selectData);
 $studentsTable = "";
 if ($result->num_rows > 0) {
     //output data of each row
-    $studentsTable .= "<form id = 'deleteStudent' action = 'deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable'>";
+    $studentsTable .= "<form id = 'deleteStudent' action = 'phpProcessing/deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable'>";
     $studentsTable .= "<tr>
                 <th style = 'display: none;' class = 'checkboxColumn'>
                     <span onclick = \"document.getElementById('deleteStudent').submit();\" class = 'glyphicon glyphicon-trash'></span>
