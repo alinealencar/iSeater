@@ -95,7 +95,6 @@ footer div p {
 }
 .addRemoveForm label {
     width: 15%;
-    text-align: right;
 }
 .addRemoveForm [input = "submit"] {
     text-align: right;

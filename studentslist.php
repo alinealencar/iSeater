@@ -7,14 +7,7 @@ require "includes/head.php";
     <body>
     <?php require "includes/menu.php"; ?>
         <script>
-            function showForm(elementId) {
-                //hide all the forms
-                //document.getElementById("addStudent").style.display = "none";
-                //document.getElementById("removeStudent").style.display = "none";
-                //document.getElementById("addRestriction").style.display = "none";
-                //document.getElementById("removeRestriction").style.display = "none";
-                //show the selected form
-                //document.getElementById(elementId).style.display = "block";
+            function showForm() {
                 $(".addRemoveForm").toggle();
             };
 
@@ -29,10 +22,9 @@ require "includes/head.php";
         <div class = "studentsListButtons">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
             <button onclick = "removeStudent()" type="button" class="btn btn-danger">Remove Student</button>
-            <!--button onclick = "" type="button" class="btn btn-info">Add Restriction</button-->
-            <!--button onclick = "" type="button" class="btn btn-warning">Remove Restriction</button-->
         </div>
         <br>
+
         <div class = "addRemoveForm" id = "addStudent" style = "display: none">
             <form action = "studentslist.php" method = "post">
                 <p>Add Student</p>
@@ -42,47 +34,30 @@ require "includes/head.php";
                 <br>
                 <label>Last Name:&nbsp;</label><input type = "text" name = "lastName" required>
                 <br>
-                <label>Gender:&nbsp;</label><input type = "text" name = "gender" required>
+                <label>Gender:&nbsp;</label><input type = "radio" name = "gender" value = "M">&nbsp;<input type = "radio" name = "gender" value = "F">
                 <br>
-                <label>Class:&nbsp;</label><input type = "text" name = "class" required>
+                <label>Class:&nbsp;</label>
+                    <select name = "class" required>
+
+                        <?php
+                        //populate this dropdown with the existing classes
+                        $selectClasses = "SELECT ClassID FROM Class;";
+                        $result = $conn->query($selectClasses);
+
+                        if ($result->num_rows){
+                            $optionsStr = "";
+                            while($row = $result->fetch_assoc()) {
+                                $optionsStr.= "<option value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
+                            }
+                            echo $optionsStr;
+                        }
+                        ?>
+
+                    </select>
                 <br><br>
                 <input name = "addStudentSubmit" type = "submit" value = "Add Student">
             </form>
         </div>
-        <!--div class = "addRemoveForm" id = "removeStudent" style = "display: none">
-            <form method = "post">
-                <p>Remove Student</p>
-                <label>Student ID:&nbsp;</label><input type = "text" name = "studentid">
-                <br><br>
-                <input name = "removeStudentSubmit" type = "submit" value = "Remove Student">
-            </form>
-        </div>
-        <div class = "addRemoveForm" id = "addRestriction" style = "display: none">
-            <form method = "post">
-                <p>Add Restriction</p>
-                <input type = "radio" name = "restrictionType" value = "together">&nbsp;Together</input>
-                &nbsp;
-                <input type = "radio" name = "restrictionType" value = "separate">&nbsp;Separate</input>
-                <br><br>
-                <label>First Student ID:&nbsp;</label><input type = "text" name = "student1" required>
-                <br>
-                <label>Second Student ID:&nbsp;</label><input type = "text" name = "student2" required>
-                <br><br>
-                <input name = "addRestrictionSubmit" type = "submit" value = "Add Restriction">
-            </form>
-        </div>
-        <div class = "addRemoveForm" id = "removeRestriction" style = "display: none">
-            <form method = "post">
-                <p>Remove Restriction</p>
-                <input type = "radio" name = "restrictionType" value = "together">&nbsp;Together</input>
-                &nbsp;
-                <input type = "radio" name = "restrictionType" value = "separate">&nbsp;Separate</input>
-                <br><br>
-                <label>Student ID:&nbsp;</label><input type = "text" name = "studentid" required>
-                <br><br>
-                <input name = "removeRestrictionSubmit" type = "submit" value = "Remove Restriction">
-            </form>
-        </div-->
         <br><br>
 
 <?php
@@ -90,7 +65,7 @@ $selectData = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_Us
 $result = $conn->query($selectData);
 
 $studentsTable = "";
-if ($result->num_rows > 0) {
+if ($result->num_rows) {
     //output data of each row
     $studentsTable .= "<form id = 'deleteStudent' action = 'phpProcessing/deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable'>";
     $studentsTable .= "<tr>
@@ -150,46 +125,11 @@ if(isset($_POST['addStudentSubmit']))
     $conn->query($addStudent);
     $conn->query($addStudentClass);
 
-}
-/*if(isset($_POST['removeStudentSubmit']))
-{
-    //remove student from the Student table by using the student id
-    $removeStudent = "DELETE FROM Student WHERE studentID = '".$_POST['studentid']."'";
-    //run query
-    $conn->query($removeStudent);
-}
-if(isset($_POST['addRestrictionSubmit']))
-{
-    //get a string with the restriction type from the radio button
-    $restrictionType = $_POST['restrictionType'];
-    //add first restriction
-    $addRestriction1 = "UPDATE Student SET ".$restrictionType." = '".$_POST['student1']."' WHERE studentid = '".$_POST['student2']."'";
-    //add second restriction
-    $addRestriction2 = "UPDATE Student SET ".$restrictionType." = '".$_POST['student2']."' WHERE studentid = '".$_POST['student1']."'";
-    //run queries
-    $conn->query($addRestriction1);
-    $conn->query($addRestriction2);
-}
-if(isset($_POST['removeRestrictionSubmit']))
-{
-    //get the restriction type (together or separate)
-    $restrictionType = $_POST['restrictionType'];
-    //select the studentid column of the student with the [restriction type] equal to the input of the user
-    $otherStudentQuery = "SELECT studentid FROM Student WHERE ".$restrictionType." = '".$_POST['studentid']."'";
-    //run query and save object into the variable $otherStudent
-    $otherStudent = $conn->query($otherStudentQuery);
-    //read the object and save it into $student2
-    $student2 = $otherStudent->fetch_assoc();
-    //query to set the Together column of the entered student to null
-    $removeRestriction1 = "UPDATE Student SET ".$restrictionType." = null WHERE studentid = '".$_POST['studentid']."'";
-    //query to set the Together column of the student that is on the [restriction type] column of the student entered to null
-    //$student2['studentid'] will hold a student id
-    $removeRestriction2 = "UPDATE Student SET ".$restrictionType." = null WHERE studentid = '".$student2['studentid']."'";
+    //reload the page after adding a student
+    header('Location: studentslist.php');
 
-    //run queries
-    $conn->query($removeRestriction1);
-    $conn->query($removeRestriction2);
-}*/
+}
+
 //close connection
 $conn->close();
 ?>
