@@ -2,15 +2,26 @@
 $title = "iSeater - Generate Chart";
 $user = "Aline";
 require "includes/head.php";
+require "includes/databaseConnection.php";
 ?>
     <body>
     <?php require "includes/menu.php"; ?>
     <form id = "generateChartForm" action = "chartform.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class">
-            <option value="1">1st grade</option>
-            <option value="2">2nd grade</option>
-            <option value="3">3rd grade</option>
+            <?php
+            //populate this dropdown with the existing classes
+            $selectClasses = "SELECT ClassID FROM Class;";
+            $result = $conn->query($selectClasses);
+
+            if ($result->num_rows){
+                $optionsStr = "";
+                while($row = $result->fetch_assoc()) {
+                    $optionsStr.= "<option value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
+                }
+                echo $optionsStr;
+            }
+            ?>
         </select>
         <br><br><br><br>
         <span class = "formSection">Gender Pattern</span>
