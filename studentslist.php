@@ -141,9 +141,15 @@ require "includes/footer.php";
 if(isset($_POST['addStudentSubmit']))
 {
     //query to add values into the Student table
-    $addStudent = "INSERT INTO IS_USER (UserID, FirstName, LastName, Gender, Class) VALUES ('".$_POST['studentid']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','".$_POST['class']."')";
+    $addStudent = "INSERT INTO IS_User (UserID, FirstName, LastName, Gender, Role) VALUES (".$_POST['studentid'].",'".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','Student');";
+    $addStudentClass = "INSERT INTO IS_User_Class(UserID, ClassID) VALUES (".$_POST['studentid'].", '".$_POST['class']."');";
+
+    echo $addStudentClass;
+    echo $addStudent;
     //run query
     $conn->query($addStudent);
+    $conn->query($addStudentClass);
+
 }
 /*if(isset($_POST['removeStudentSubmit']))
 {
