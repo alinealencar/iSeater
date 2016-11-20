@@ -118,11 +118,11 @@ if ($result->num_rows > 0) {
         if(isset($row["Together"]))
             $studentsTable .= "<td>".$row["Together"]."</td>";
         else
-            $studentsTable .= "<td class = \"addRestriction\"><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
+            $studentsTable .= "<td class = 'addRestriction'><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
         if(isset($row["Separate"]))
             $studentsTable .= "<td>".$row["Separate"]."</td>";
         else
-            $studentsTable .= "<td class = \"addRestriction\"><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
+            $studentsTable .= "<td class = 'addRestriction'><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
         $studentsTable .= "</tr>";
     }
     $studentsTable .= "</table></form>";
