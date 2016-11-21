@@ -6,18 +6,18 @@ require "includes/databaseConnection.php";
 ?>
     <body>
     <?php require "includes/menu.php"; ?>
-    <form id = "generateChartForm" action = "chartform.php" method = "post">
+    <form id = "generateChartForm" action = "phpProcessing/processGenerateChart.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class">
             <?php
             //populate this dropdown with the existing classes
-            $selectClasses = "SELECT ClassID FROM Class;";
+            $selectClasses = "SELECT DISTINCT ClassID FROM IS_User_Class;";
             $result = $conn->query($selectClasses);
 
             if ($result->num_rows){
                 $optionsStr = "";
                 while($row = $result->fetch_assoc()) {
-                    $optionsStr.= "<option value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
+                    $optionsStr.= "<option name = 'class' value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
                 }
                 echo $optionsStr;
             }
@@ -55,22 +55,22 @@ require "includes/databaseConnection.php";
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/alphabeticalhorizontalf.png"></div><br>
                 <span class = "genderSelection">Alphabetical Order<br>(Horizontal)</span><br>
-                <input type="radio" name="order" value="alphabetical" checked>
+                <input type="radio" name="order" value="alphabeticalHorizontal" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical vertical" src="images/alphabeticalverticalf.png"></div><br>
                 <span class = "genderSelection">Alphabetical Order<br>(Vertical)</span><br>
-                <input type="radio" name="order" value="alphabetical" checked>
+                <input type="radio" name="order" value="alphabeticalVertical" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="id horizontal" src="images/idhorizontalf.png"></div><br>
                 <span class = "genderSelection">ID Order<br>(Horizontal)</span><br>
-                <input type="radio" name="order" value="byid" checked>
+                <input type="radio" name="order" value="byidHorizontal" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/idverticalf.png"></div><br>
                 <span class = "genderSelection">ID Order<br>(Vertical)</span><br>
-                <input type="radio" name="order" value="byid" checked>
+                <input type="radio" name="order" value="byidVertical" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/randomf.png"></div><br>
@@ -89,7 +89,7 @@ require "includes/databaseConnection.php";
 
         <br><br><br><br><br>
 
-        <input class = "submitButton" type="submit" value="Generate Chart">
+        <input name = "generateChart" class = "submitButton" type="submit" value="Generate Chart">
         <!--</div>-->
     </form>
     </body>

@@ -5,7 +5,8 @@
  * Date: 2016-11-05
  * Time: 6:04 PM
  */
-require "databaseConnection.php";
+
+require "../includes/databaseConnection.php";
 
 if(isset($_POST['generateChart']))
 {
@@ -31,10 +32,10 @@ if(isset($_POST['generateChart']))
         if($genderPattern == "nogender"){
             if(isset($_POST['order'])) {
                 $order = $_POST['order'];
-
                 /* ARRANGE ALPHABETICALLY AND HORIZONTALLY*/
                 if ($order == "alphabeticalHorizontal") {
                     $classroomByLastName = sortAlphabetically($classroomNoGender);
+
                     $classroomByLastNameIndex = 0;
                     //Populate the empty $classLayout array with the students
                     for($row = sizeof($classLayout)-1; $row >= 0; $row--){
@@ -99,7 +100,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]." ";
+                            echo $curStudent["UserID"]." ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -125,7 +126,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]." ";
+                            echo $curStudent["UserID"]." ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -244,7 +245,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -275,7 +276,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -408,7 +409,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -441,7 +442,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -583,7 +584,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -618,7 +619,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["StudentID"]."(".$curStudent["Gender"].") ";
+                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -710,67 +711,90 @@ function separateByGender($inputArray){
 function generateClassLayout(){
     $classroomLayout = [];
 
+    global $conn;
+
+    $getClassroom = "SELECT RoomID FROM Class WHERE ClassID = '".$_POST['class']."'";
+
+    $classroom = $conn->query($getClassroom);
+
+    if($classroom->num_rows){
+        while($row = $classroom->fetch_assoc()){
+            $roomNumber = $row['RoomID'];
+        }
+    }
+
+    $getRowsAndCols = "SELECT NumRows, NumCols FROM Room WHERE RoomID = '".$roomNumber."'";
+
+    $rowsAndCols = $conn->query($getRowsAndCols);
+
+    if($rowsAndCols->num_rows){
+        while($row = $rowsAndCols->fetch_assoc()){
+            $rows = $row["NumRows"];
+            $cols = $row["NumCols"];
+        }
+    }
+
     //if statements to check which classroom layout was chosen
-    if($_POST['layout'] == "fivesix") {
-        $rows = 6;
-        $cols = 5;
-    }
-    elseif ($_POST['layout'] == "fiveseven")
-    {
-        $rows = 7;
-        $cols = 5;
-    }
-    elseif ($_POST['layout'] == "fiveeight")
-    {
-        $rows =  8;
-        $cols =  5;
-    }
-    elseif ($_POST['layout'] == "sixfive")
-    {
-        $rows =  5;
-        $cols =  6;
-    }
-    elseif ($_POST['layout'] == "sixsix")
-    {
-        $rows =  6;
-        $cols =  6;
-    }
-    elseif ($_POST['layout'] == "sixseven")
-    {
-        $rows =  7;
-        $cols =  6;
-    }
-    elseif ($_POST['layout'] == "threesix")
-    {
-        $rows =  6;
-        $cols =  2;
-    }
-    elseif ($_POST['layout'] == "fourfour")
-    {
-        $rows =  4;
-        $cols =  8;
-    }
-    elseif ($_POST['layout'] == "fourfive")
-    {
-        $rows =  5;
-        $cols =  8;
-    }
-    elseif ($_POST['layout'] == "single")
-    {
-        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
-        {
-            $rows = $_POST['selectedRows'];
-            $cols = $_POST['selectedColumns'];
-        }
-    }
-    elseif ($_POST['layout'] == "double")
-    {
-        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
-        {
-            $rows = $_POST['selectedRows'];
-            $cols = $_POST['selectedColumns'];
-        }
-    }
+//    if($_POST['layout'] == "fivesix") {
+//        $rows = 6;
+//        $cols = 5;
+//    }
+//    elseif ($_POST['layout'] == "fiveseven")
+//    {
+//        $rows = 7;
+//        $cols = 5;
+//    }
+//    elseif ($_POST['layout'] == "fiveeight")
+//    {
+//        $rows =  8;
+//        $cols =  5;
+//    }
+//    elseif ($_POST['layout'] == "sixfive")
+//    {
+//        $rows =  5;
+//        $cols =  6;
+//    }
+//    elseif ($_POST['layout'] == "sixsix")
+//    {
+//        $rows =  6;
+//        $cols =  6;
+//    }
+//    elseif ($_POST['layout'] == "sixseven")
+//    {
+//        $rows =  7;
+//        $cols =  6;
+//    }
+//    elseif ($_POST['layout'] == "threesix")
+//    {
+//        $rows =  6;
+//        $cols =  2;
+//    }
+//    elseif ($_POST['layout'] == "fourfour")
+//    {
+//        $rows =  4;
+//        $cols =  8;
+//    }
+//    elseif ($_POST['layout'] == "fourfive")
+//    {
+//        $rows =  5;
+//        $cols =  8;
+//    }
+//    elseif ($_POST['layout'] == "single")
+//    {
+//        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
+//        {
+//            $rows = $_POST['selectedRows'];
+//            $cols = $_POST['selectedColumns'];
+//        }
+//    }
+//    elseif ($_POST['layout'] == "double")
+//    {
+//        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
+//        {
+//            $rows = $_POST['selectedRows'];
+//            $cols = $_POST['selectedColumns'];
+//        }
+//    }
     //create a two dimensional array ($rows rows and $columns columns)
     for($i = 0; $i < $rows; $i ++){
             //all the elements of this array are empty strings ""
@@ -784,8 +808,12 @@ function getStudents(){
     global $conn; //access outer variable
     $selectedClass = $_POST['class'];
     //query to get all rows of the selectedClass
-    $classQuery = "SELECT * FROM Student WHERE Class = '$selectedClass'";
+    $classQuery = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID, IS_User_Class.Separate, IS_User_Class.Together 
+            FROM IS_User_Class 
+            INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID WHERE ClassID = '".$selectedClass."';";
     //run query
+
+    //echo $classQuery;
     $class = $conn->query($classQuery);
 
     $classroom = [];
@@ -796,7 +824,6 @@ function getStudents(){
             $classroom[] = $row;
         }
     }
-
     return $classroom;
 }
 
@@ -808,7 +835,7 @@ function compareLastName($a, $b)
 
 function compareStudentId($a, $b)
 {
-    return strcmp($a[StudentID], $b[StudentID]);
+    return strcmp($a[UserID], $b[UserID]);
 }
 
 function sortAlphabetically($inputArray){

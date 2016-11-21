@@ -17,6 +17,9 @@ require "includes/head.php";
                 //when they click it again, the column is hidden
                 $(".checkboxColumn").toggle();
             }
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
         </script>
         <br>
         <div class = "studentsListButtons">
@@ -38,7 +41,6 @@ require "includes/head.php";
                 <br>
                 <label>Class:&nbsp;</label>
                     <select name = "class" required>
-
                         <?php
                         //populate this dropdown with the existing classes
                         $selectClasses = "SELECT ClassID FROM Class;";
@@ -52,7 +54,6 @@ require "includes/head.php";
                             echo $optionsStr;
                         }
                         ?>
-
                     </select>
                 <br><br>
                 <input name = "addStudentSubmit" type = "submit" value = "Add Student">
@@ -93,7 +94,25 @@ if ($result->num_rows) {
         if(isset($row["Together"]))
             $studentsTable .= "<td>".$row["Together"]."</td>";
         else
-            $studentsTable .= "<td class = 'addRestriction'><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
+        {
+            $optionsStr = "<select name='studentsTogether'>";
+
+            $selectStudents = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID, IS_User_Class.Separate, IS_User_Class.Together 
+            FROM IS_User_Class 
+            INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID WHERE ClassID = '".$row["ClassID"]."'";
+
+            $result2 = $conn->query($selectStudents);
+
+            if ($result2->num_rows){
+                while($row2 = $result2->fetch_assoc()) {
+                    $optionsStr.= "<option value = '".$row2["UserID"]."'>".$row2["FirstName"]." - ".$row2["UserID"]."</option>";
+                }
+            }
+
+            $optionsStr .= "</select>";
+
+            $studentsTable .= "<td class = 'addRestriction'>$optionsStr</td>";
+        }
         if(isset($row["Separate"]))
             $studentsTable .= "<td>".$row["Separate"]."</td>";
         else
