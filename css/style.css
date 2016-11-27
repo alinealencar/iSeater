@@ -84,21 +84,6 @@ footer div p {
 .sortable th.ascend:after {
     content: "\25BC";
 }
-.addRemoveForm {
-    margin: 0 auto;
-    display: inline-block;
-    text-align: center;
-    clear: both;
-}
-.addRemoveForm input {
-    clear: both;
-}
-.addRemoveForm label {
-    width: 15%;
-}
-.addRemoveForm [input = "submit"] {
-    text-align: right;
-}
 .studentsList {
     width: 80%;
     margin: 0 auto;
@@ -117,7 +102,4 @@ footer div p {
     color: red;
     text-align: left;
     display: inline-block;
-}
-.addRestriction {
-    color: #00a4d3;
 }

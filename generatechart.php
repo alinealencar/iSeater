@@ -11,7 +11,7 @@ require "includes/databaseConnection.php";
         <select name="class">
             <?php
             //populate this dropdown with the existing classes
-            $selectClasses = "SELECT DISTINCT ClassID FROM IS_User_Class;";
+            $selectClasses = "SELECT DISTINCT ClassID FROM Class;";
             $result = $conn->query($selectClasses);
 
             if ($result->num_rows){
@@ -23,7 +23,23 @@ require "includes/databaseConnection.php";
             }
             ?>
         </select>
-        <br><br><br><br>
+        <br><br>
+        <select name="term">
+            <?php
+            //populate this dropdown with the existing classes
+            $selectTerm = "SELECT DISTINCT Term FROM Class;";
+            $result = $conn->query($selectTerm);
+
+            if ($result->num_rows){
+                $optionsStr = "";
+                while($row = $result->fetch_assoc()) {
+                    $optionsStr.= "<option name = 'term' value = '".$row["Term"]."'>".$row["Term"]."</option>";
+                }
+                echo $optionsStr;
+            }
+            ?>
+        </select>
+        <br><br>
         <span class = "formSection">Gender Pattern</span>
         <br><br>
         <div class = "genderGroup">

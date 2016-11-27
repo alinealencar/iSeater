@@ -22,47 +22,63 @@ require "includes/head.php";
             })
         </script>
         <br>
-        <div class = "studentsListButtons">
+        <div class = "studentsListButtons" style="text-align: center;">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
             <button onclick = "removeStudent()" type="button" class="btn btn-danger">Remove Student</button>
         </div>
         <br>
 
-        <div class = "addRemoveForm" id = "addStudent" style = "display: none">
+        <div class = "addRemoveForm" style = "display: none;">
             <form action = "studentslist.php" method = "post">
                 <p>Add Student</p>
-                <label>Student ID:&nbsp;</label><input type = "text" name = "studentid" required>
-                <br>
-                <label>First Name:&nbsp;</label><input type = "text" name = "firstName" required>
-                <br>
-                <label>Last Name:&nbsp;</label><input type = "text" name = "lastName" required>
-                <br>
-                <label>Gender:&nbsp;</label><input type = "radio" name = "gender" value = "M">&nbsp;<input type = "radio" name = "gender" value = "F">
-                <br>
-                <label>Class:&nbsp;</label>
-                    <select name = "class" required>
-                        <?php
-                        //populate this dropdown with the existing classes
-                        $selectClasses = "SELECT ClassID FROM Class;";
-                        $result = $conn->query($selectClasses);
+                <table>
+                    <tr>
+                        <td>Student ID: </td>
+                        <td><input type = "text" name = "studentid" required></td>
+                    </tr>
+                    <tr>
+                        <td>First Name: </td>
+                        <td><input type = "text" name = "firstName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name: </td>
+                        <td><input type = "text" name = "lastName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Gender: </td>
+                        <td>
+                            <input type = "radio" name = "gender" value = "M" required> M
+                            <input type = "radio" name = "gender" value = "F"> F
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Class: </td>
+                        <td>
+                            <select name = "class" required>
+                                <?php
+                                //populate this dropdown with the existing classes
+                                $selectClasses = "SELECT ClassID FROM Class;";
+                                $result = $conn->query($selectClasses);
 
-                        if ($result->num_rows){
-                            $optionsStr = "";
-                            while($row = $result->fetch_assoc()) {
-                                $optionsStr.= "<option value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
-                            }
-                            echo $optionsStr;
-                        }
-                        ?>
-                    </select>
-                <br><br>
+                                if ($result->num_rows){
+                                    $optionsStr = "";
+                                    while($row = $result->fetch_assoc()) {
+                                        $optionsStr.= "<option value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
+                                    }
+                                    echo $optionsStr;
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <input name = "addStudentSubmit" type = "submit" value = "Add Student">
             </form>
         </div>
         <br><br>
-
 <?php
-$selectData = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID, IS_User_Class.Separate, IS_User_Class.Together FROM IS_User_Class INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID";
+$selectData = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID FROM IS_User_Class INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID";
 $result = $conn->query($selectData);
 
 $studentsTable = "";
@@ -78,8 +94,6 @@ if ($result->num_rows) {
                 <th>Last Name</th>
                 <th>Gender</th>
                 <th>Class</th> 
-                <th>Together</th>
-                <th>Separate</th>
                 </tr>";
     while($row = $result->fetch_assoc()) {
         $studentsTable .= "<tr>";
@@ -89,37 +103,10 @@ if ($result->num_rows) {
         $studentsTable .= "<td>".$row["LastName"]."</td>";
         $studentsTable .= "<td>".$row["Gender"]."</td>";
         $studentsTable .= "<td>".$row["ClassID"]."</td>";
-        //if you have any existing conditions, show them
-        //otherwise, show the add button
-        if(isset($row["Together"]))
-            $studentsTable .= "<td>".$row["Together"]."</td>";
-        else
-        {
-            $optionsStr = "<select name='studentsTogether'>";
-
-            $selectStudents = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID, IS_User_Class.Separate, IS_User_Class.Together 
-            FROM IS_User_Class 
-            INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID WHERE ClassID = '".$row["ClassID"]."'";
-
-            $result2 = $conn->query($selectStudents);
-
-            if ($result2->num_rows){
-                while($row2 = $result2->fetch_assoc()) {
-                    $optionsStr.= "<option value = '".$row2["UserID"]."'>".$row2["FirstName"]." - ".$row2["UserID"]."</option>";
-                }
-            }
-
-            $optionsStr .= "</select>";
-
-            $studentsTable .= "<td class = 'addRestriction'>$optionsStr</td>";
-        }
-        if(isset($row["Separate"]))
-            $studentsTable .= "<td>".$row["Separate"]."</td>";
-        else
-            $studentsTable .= "<td class = 'addRestriction'><span class = \"glyphicon glyphicon-plus-sign\"></span></td>";
         $studentsTable .= "</tr>";
     }
     $studentsTable .= "</table></form>";
+
     echo $studentsTable;
 }
 else {
