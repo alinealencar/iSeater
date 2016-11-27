@@ -1,11 +1,11 @@
 <?php
 
 $title = "iSeater - Students";
-require "includes/databaseConnection.php";
-require "includes/head.php";
+require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
+require "includes".DIRECTORY_SEPARATOR."head.php";
 ?>
     <body>
-    <?php require "includes/menu.php"; ?>
+    <?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
         <script>
             function showForm() {
                 $(".addRemoveForm").toggle();
@@ -115,7 +115,7 @@ else {
 ?>
     </body>
 <?php
-require "includes/footer.php";
+require "includes".DIRECTORY_SEPARATOR."footer.php";
 
 
 //form processing

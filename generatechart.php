@@ -1,11 +1,11 @@
 <?php
 $title = "iSeater - Generate Chart";
 $user = "Aline";
-require "includes/head.php";
-require "includes/databaseConnection.php";
+require "includes".DIRECTORY_SEPARATOR."head.php";
+require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 ?>
     <body>
-    <?php require "includes/menu.php"; ?>
+    <?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
     <form id = "generateChartForm" action = "output.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class" required>
@@ -112,5 +112,5 @@ require "includes/databaseConnection.php";
     </form>
     </body>
 <?php
-require "includes/footer.php";
+require "includes".DIRECTORY_SEPARATOR."footer.php";
 ?>

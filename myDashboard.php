@@ -1,9 +1,9 @@
 <?php
-$title = "iSeater - Generate Chart";
+$title = "iSeater - Dashboard";
 $username = "Aline";
-require "includes/head.php";
-require "includes/menu.php";
-require "includes/databaseConnection.php";
+require "includes".DIRECTORY_SEPARATOR."head.php";
+require "includes".DIRECTORY_SEPARATOR."menu.php";
+require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 ?>
 <body>
     <script>
@@ -68,4 +68,5 @@ require "includes/databaseConnection.php";
         </div>
     </div>
 </body>
+<?php require "includes".DIRECTORY_SEPARATOR."footer.php"?>
 </html>

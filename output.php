@@ -1,7 +1,6 @@
 <?php
 require "includes".DIRECTORY_SEPARATOR."head.php";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
-require "includes".DIRECTORY_SEPARATOR."menu.php";
 
 if(isset($_POST['generateChart']))
 {
@@ -760,6 +759,9 @@ function saveLayout($arr){
 }
 ?>
 <body>
+
+<?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
+
     <div>
         <script>
             function saveLayout() {
