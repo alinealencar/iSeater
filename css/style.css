@@ -103,3 +103,6 @@ footer div p {
     text-align: left;
     display: inline-block;
 }
+footer {
+    clear: both;
+}

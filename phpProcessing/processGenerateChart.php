@@ -830,6 +830,7 @@ if(isset($_POST['generateChart']))
             }
         }
     }
+    saveLayout($classLayout);
 }
 
 //function to shuffle 2-dimensional arrays
@@ -953,4 +954,13 @@ function sortAlphabetically($inputArray){
 function sortByStudentId($inputArray){
     usort($inputArray, "compareStudentID");
     return $inputArray;
+}
+
+function saveLayout($arr){
+    global $conn;
+    $selectedClass = $_POST['class'];
+    $serializedLayout = serialize($arr);
+    $layoutQuery = "UPDATE Class SET layout = '" . $serializedLayout . "' WHERE ClassID = '" . $selectedClass . "';";
+    $conn->query($layoutQuery);
+    return $serializedLayout;
 }

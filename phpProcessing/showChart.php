@@ -2,20 +2,7 @@
 <html>
 <head>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin-left: 10%;
-        }
 
-        table, tr, td {
-            border: 1px solid black;
-        }
-        td{
-            text-align: center;
-            width: auto;
-            padding: 1%;
-        }
     </style>
 </head>
 <body></body>
@@ -28,7 +15,7 @@
  */
 require "../includes/databaseConnection.php";
 
-global $conn;
+//global $conn;
 $query = 'SELECT * FROM Class WHERE ClassID = "1B2016" ';//.$_POST["class"].';';
 $result = $conn -> query($query);
 //var_dump($result);
@@ -42,9 +29,9 @@ echo $result->num_rows . "<hr>";
 
     $serializedData = $result->fetch_assoc()['Layout'];
 
-    //unsilizlized layout
+    //unserialized layout
     $layoutArr = unserialize($row['Layout']);
-    print_r($layoutArr);
+    //print_r($layoutArr);
 echo "<hr>";
 /*******************************************************/
 /*foreach ($layoutArr as $firstIndex => $row){
