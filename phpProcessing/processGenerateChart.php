@@ -830,6 +830,7 @@ if(isset($_POST['generateChart']))
             }
         }
     }
+
     saveLayout($classLayout);
 }
 
@@ -964,3 +965,4 @@ function saveLayout($arr){
     $conn->query($layoutQuery);
     return $serializedLayout;
 }
+
