@@ -24,6 +24,7 @@ require "includes/databaseConnection.php";
             ?>
         </select>
         <br><br>
+        <span class = "formLabel">Select a term: </span>
         <select name="term">
             <?php
             //populate this dropdown with the existing classes

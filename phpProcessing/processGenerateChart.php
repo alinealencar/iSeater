@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aline
- * Date: 2016-11-05
- * Time: 6:04 PM
- */
 
 require "../includes/databaseConnection.php";
 
@@ -14,7 +8,6 @@ if(isset($_POST['generateChart']))
     $classLayout = generateClassLayout();
     //1-dimensional array with all the students in the selected class
     $classroomNoGender = getStudents();
-
     //check if number of students and number of seats are compatible
     if(sizeof($classroomNoGender) > (sizeof($classLayout) * sizeof($classLayout[0]))){
         echo "Class ".$classroomNoGender[0]['Class']." has ".sizeof($classroomNoGender)." students and the chosen
@@ -144,6 +137,15 @@ if(isset($_POST['generateChart']))
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                                 $classLayout[$rows][$col] = $classroomNoGender[$classroomNoGenderIndex];
                                 $classroomNoGenderIndex++;
+                        }
+                    }
+
+                    for($i = 0; $i < sizeof($classLayout); $i++){
+                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
+                            $curStudent = $classLayout[$i][$j];
+                            echo $curStudent["LastName"]." ";
+                            if($j == sizeof($classLayout[0]) - 1)
+                                echo "<br>";
                         }
                     }
                 }
@@ -306,7 +308,7 @@ if(isset($_POST['generateChart']))
                     for($i = 0; $i < sizeof($classLayout); $i++){
                         for($j = 0; $j < sizeof($classLayout[0]); $j++){
                             $curStudent = $classLayout[$i][$j];
-                            //echo $curStudent["Gender"];
+                            echo $curStudent["Gender"];
                             if($j == sizeof($classLayout[0]) - 1)
                                 echo "<br>";
                         }
@@ -495,20 +497,54 @@ if(isset($_POST['generateChart']))
                     $girlsArrayIndex = 0;
                     $boysArrayIndex = 0;
 
-                    $counter = 0;
-                    for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                            if($counter % 2 == 0){
-                                $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                $boysArrayIndex++;
-                                $counter++;
-                            }
-                            else {
-                                $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                $girlsArrayIndex++;
-                                $counter++;
+                    //logic for classrooms with an odd number of columns
+                    if (sizeof($classLayout[0]) % 2 != 0)
+                    {
+                        $counter = 0;
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                                if($counter % 2 == 0){
+                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
                             }
                         }
+                    }
+                    else {
+                        $evenRow = 0;
+                        $counter = 0;
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                                if($counter % 2 == 0 && $evenRow % 2 == 0){
+                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 != 0 && $evenRow % 2 == 0) {
+                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 == 0 && $evenRow % 2 != 0){
+                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                            }
+                            $evenRow++;
+                        }
+
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
@@ -529,20 +565,53 @@ if(isset($_POST['generateChart']))
                     $girlsArrayIndex = 0;
                     $boysArrayIndex = 0;
 
-                    $counter = 0;
-                    for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            if($counter % 2 == 0){
-                                $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                $boysArrayIndex++;
-                                $counter++;
-                            }
-                            else {
-                                $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                $girlsArrayIndex++;
-                                $counter++;
+                    if (sizeof($classLayout[0]) % 2 != 0)
+                    {
+                        $counter = 0;
+                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                            for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                                if($counter % 2 == 0){
+                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
                             }
                         }
+                    }
+                    else {
+                        $evenRow = 0;
+                        $counter = 0;
+                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                            for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                                if($counter % 2 == 0 && $evenRow % 2 == 0){
+                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 != 0 && $evenRow % 2 == 0) {
+                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 == 0 && $evenRow % 2 != 0){
+                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                            }
+                            $evenRow++;
+                        }
+
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
@@ -563,20 +632,53 @@ if(isset($_POST['generateChart']))
                     $girlsArrayIndex = 0;
                     $boysArrayIndex = 0;
 
-                    $counter = 0;
-                    for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                            if($counter % 2 == 0){
-                                $classLayout[$row][$col] = $boysById[$boysArrayIndex];
-                                $boysArrayIndex++;
-                                $counter++;
-                            }
-                            else {
-                                $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
-                                $girlsArrayIndex++;
-                                $counter++;
+                    if (sizeof($classLayout[0]) % 2 != 0)
+                    {
+                        $counter = 0;
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                                if($counter % 2 == 0){
+                                    $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
                             }
                         }
+                    }
+                    else {
+                        $evenRow = 0;
+                        $counter = 0;
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                                if($counter % 2 == 0 && $evenRow % 2 == 0){
+                                    $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 != 0 && $evenRow % 2 == 0) {
+                                    $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 == 0 && $evenRow % 2 != 0){
+                                    $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                            }
+                            $evenRow++;
+                        }
+
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
@@ -597,21 +699,53 @@ if(isset($_POST['generateChart']))
                     $girlsArrayIndex = 0;
                     $boysArrayIndex = 0;
 
-                    $counter = 0;
-
-                    for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            if($counter % 2 == 0){
-                                $classLayout[$row][$col] = $boysById[$boysArrayIndex];
-                                $boysArrayIndex++;
-                                $counter++;
-                            }
-                            else {
-                                $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
-                                $girlsArrayIndex++;
-                                $counter++;
+                    if (sizeof($classLayout[0]) % 2 != 0)
+                    {
+                        $counter = 0;
+                        for($col = 0; $col < sizeof($classLayout); $col++){
+                            for($row = sizeof($classLayout[0]) - 1; $row >=0 ; $row--){
+                                if($counter % 2 == 0){
+                                    $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
                             }
                         }
+                    }
+                    else {
+                        $evenRow = 0;
+                        $counter = 0;
+                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                            for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                                if($counter % 2 == 0 && $evenRow % 2 == 0){
+                                    $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 != 0 && $evenRow % 2 == 0) {
+                                    $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 == 0 && $evenRow % 2 != 0){
+                                    $classLayout[$row][$col] = $girlsById[$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $boysById[$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                            }
+                            $evenRow++;
+                        }
+
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
@@ -632,20 +766,54 @@ if(isset($_POST['generateChart']))
                     $boysArrayIndex = 0;
                     $girlsArrayIndex = 0;
                     //$counter controls if we're getting a girl or a boy (odd for boys, even for girls)
-                    $counter = 0;
-                    for($rows = 0; $rows < sizeof($classLayout); $rows++){
-                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                            if($counter % 2 == 0){
-                                $classLayout[$rows][$col] = $genderSorted[0][$boysArrayIndex];
-                                $girlsArrayIndex++;
-                                $counter++;
-                            }
-                            else {
-                                $classLayout[$rows][$col] = $genderSorted[1][$girlsArrayIndex];
-                                $boysArrayIndex++;
-                                $counter++;
+
+                    if (sizeof($classLayout[0]) % 2 != 0)
+                    {
+                        $counter = 0;
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                                if($counter % 2 == 0){
+                                    $classLayout[$row][$col] = $genderSorted[1][$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $genderSorted[0][$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
                             }
                         }
+                    }
+                    else {
+                        $evenRow = 0;
+                        $counter = 0;
+                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                                if($counter % 2 == 0 && $evenRow % 2 == 0){
+                                    $classLayout[$row][$col] = $genderSorted[1][$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 != 0 && $evenRow % 2 == 0) {
+                                    $classLayout[$row][$col] = $genderSorted[0][$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else if($counter % 2 == 0 && $evenRow % 2 != 0){
+                                    $classLayout[$row][$col] = $genderSorted[0][$girlsArrayIndex];
+                                    $girlsArrayIndex++;
+                                    $counter++;
+                                }
+                                else {
+                                    $classLayout[$row][$col] = $genderSorted[1][$boysArrayIndex];
+                                    $boysArrayIndex++;
+                                    $counter++;
+                                }
+                            }
+                            $evenRow++;
+                        }
+
                     }
 
                     //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
@@ -733,68 +901,6 @@ function generateClassLayout(){
             $cols = $row["NumCols"];
         }
     }
-
-    //if statements to check which classroom layout was chosen
-//    if($_POST['layout'] == "fivesix") {
-//        $rows = 6;
-//        $cols = 5;
-//    }
-//    elseif ($_POST['layout'] == "fiveseven")
-//    {
-//        $rows = 7;
-//        $cols = 5;
-//    }
-//    elseif ($_POST['layout'] == "fiveeight")
-//    {
-//        $rows =  8;
-//        $cols =  5;
-//    }
-//    elseif ($_POST['layout'] == "sixfive")
-//    {
-//        $rows =  5;
-//        $cols =  6;
-//    }
-//    elseif ($_POST['layout'] == "sixsix")
-//    {
-//        $rows =  6;
-//        $cols =  6;
-//    }
-//    elseif ($_POST['layout'] == "sixseven")
-//    {
-//        $rows =  7;
-//        $cols =  6;
-//    }
-//    elseif ($_POST['layout'] == "threesix")
-//    {
-//        $rows =  6;
-//        $cols =  2;
-//    }
-//    elseif ($_POST['layout'] == "fourfour")
-//    {
-//        $rows =  4;
-//        $cols =  8;
-//    }
-//    elseif ($_POST['layout'] == "fourfive")
-//    {
-//        $rows =  5;
-//        $cols =  8;
-//    }
-//    elseif ($_POST['layout'] == "single")
-//    {
-//        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
-//        {
-//            $rows = $_POST['selectedRows'];
-//            $cols = $_POST['selectedColumns'];
-//        }
-//    }
-//    elseif ($_POST['layout'] == "double")
-//    {
-//        if (isset($_POST['selectedColumns']) && (isset($_POST['selectedRows'])))
-//        {
-//            $rows = $_POST['selectedRows'];
-//            $cols = $_POST['selectedColumns'];
-//        }
-//    }
     //create a two dimensional array ($rows rows and $columns columns)
     for($i = 0; $i < $rows; $i ++){
             //all the elements of this array are empty strings ""
@@ -808,9 +914,9 @@ function getStudents(){
     global $conn; //access outer variable
     $selectedClass = $_POST['class'];
     //query to get all rows of the selectedClass
-    $classQuery = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID, IS_User_Class.Separate, IS_User_Class.Together 
+    $classQuery = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User.Role, IS_User_Class.ClassID 
             FROM IS_User_Class 
-            INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID WHERE ClassID = '".$selectedClass."';";
+            INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID WHERE ClassID = '".$selectedClass."' AND Role = 'Student';";
     //run query
 
     //echo $classQuery;
