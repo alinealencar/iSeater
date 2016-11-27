@@ -1,6 +1,7 @@
 <?php
-
-require "../includes/databaseConnection.php";
+require "includes".DIRECTORY_SEPARATOR."head.php";
+require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
+require "includes".DIRECTORY_SEPARATOR."menu.php";
 
 if(isset($_POST['generateChart']))
 {
@@ -12,8 +13,6 @@ if(isset($_POST['generateChart']))
     if(sizeof($classroomNoGender) > (sizeof($classLayout) * sizeof($classLayout[0]))){
         echo "Class ".$classroomNoGender[0]['Class']." has ".sizeof($classroomNoGender)." students and the chosen
         classroom only has ".(sizeof($classLayout)*sizeof($classLayout[0]))." seats. Please choose another layout.";
-
-        //sleep(3); //stops execution for 3 seconds
 
         exit; //stops execution of the program
     }
@@ -39,15 +38,6 @@ if(isset($_POST['generateChart']))
 
                         }
                     }
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]." ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
 
                 /* ARRANGE ALPHABETICALLY AND VERTICALLY*/
@@ -63,16 +53,6 @@ if(isset($_POST['generateChart']))
 
                         }
                     }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]." ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
 
                 /* ARRANGE BY ASCENDING ORDER OF THE STUDENT ID AND HORIZONTALLY*/
@@ -86,16 +66,6 @@ if(isset($_POST['generateChart']))
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                             $classLayout[$row][$col] = $classroomById[$classroomByIdIndex];
                             $classroomByIdIndex++;
-                        }
-                    }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]." ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
 
@@ -115,15 +85,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]." ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
 
                 /* ARRANGE RANDOMLY */
@@ -137,15 +98,6 @@ if(isset($_POST['generateChart']))
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                                 $classLayout[$rows][$col] = $classroomNoGender[$classroomNoGenderIndex];
                                 $classroomNoGenderIndex++;
-                        }
-                    }
-
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]." ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
                 }
@@ -180,16 +132,6 @@ if(isset($_POST['generateChart']))
                             }
                         }
                     }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "alphabeticalVertical"){
                     $boysByLastName = sortAlphabetically($genderSorted[0]);
@@ -212,15 +154,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "byidHorizontal"){
                     $boysById = sortByStudentId($genderSorted[0]);
@@ -240,16 +173,6 @@ if(isset($_POST['generateChart']))
                                 $classLayout[$row][$col] = $boysById[$boysArrayIndex];
                                 $boysArrayIndex++;
                             }
-                        }
-                    }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
                 }
@@ -274,16 +197,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
-
                 }
                 else if($order == "random"){
                     //shuffle the students around the array to make sure the result is going to be truly random
@@ -301,16 +214,6 @@ if(isset($_POST['generateChart']))
                                 $classLayout[$rows][$col] = $genderSorted[0][$boysArrayIndex];
                                 $boysArrayIndex++;
                             }
-                        }
-                    }
-
-                    //$classLayout is an array rowsxcolumns ordered randomly with the girls-boys pattern
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["Gender"];
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
                 }
@@ -344,16 +247,6 @@ if(isset($_POST['generateChart']))
                             }
                         }
                     }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "alphabeticalVertical"){
                     $boysByLastName = sortAlphabetically($genderSorted[0]);
@@ -373,16 +266,6 @@ if(isset($_POST['generateChart']))
                                 $classLayout[$row][$col] = $girlsByLastName[$girlsArrayIndex];
                                 $girlsArrayIndex++;
                             }
-                        }
-                    }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
                 }
@@ -407,15 +290,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "byidVertical"){
                     $classroomById = sortByStudentId($classroomNoGender);
@@ -439,16 +313,6 @@ if(isset($_POST['generateChart']))
                             }
                         }
                     }
-
-                    //show result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "random"){
                     //shuffle the students around the array to make sure the result is going to be truly random
@@ -468,20 +332,8 @@ if(isset($_POST['generateChart']))
                             }
                         }
                     }
-
-                    //$classLayout is an array rowsxcolumns ordered randomly with the boys-girls pattern
-                    //show classLayout result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["Gender"];
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
             }
-
         }
 
         /* ARRANGE WITH BOYS AND GIRLS IN ALTERNATED ORDER */
@@ -546,17 +398,6 @@ if(isset($_POST['generateChart']))
                         }
 
                     }
-
-                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
-                    //show classLayout result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "alphabeticalVertical"){
                     $boysAlphabetically = sortAlphabetically($genderSorted[0]);
@@ -610,18 +451,6 @@ if(isset($_POST['generateChart']))
                                 }
                             }
                             $evenRow++;
-                        }
-
-                    }
-
-                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
-                    //show classLayout result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["LastName"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
                 }
@@ -677,18 +506,6 @@ if(isset($_POST['generateChart']))
                                 }
                             }
                             $evenRow++;
-                        }
-
-                    }
-
-                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
-                    //show classLayout result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
                         }
                     }
                 }
@@ -748,16 +565,6 @@ if(isset($_POST['generateChart']))
 
                     }
 
-                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
-                    //show classLayout result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["UserID"]."(".$curStudent["Gender"].") ";
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
-                    }
                 }
                 else if($order == "random"){
                     //shuffle the students around the array to make sure the result is going to be truly random
@@ -813,25 +620,11 @@ if(isset($_POST['generateChart']))
                             }
                             $evenRow++;
                         }
-
-                    }
-
-                    //$classLayout is an array rowsxcolumns ordered randomly with the alternated pattern
-                    //show classLayout result
-                    for($i = 0; $i < sizeof($classLayout); $i++){
-                        for($j = 0; $j < sizeof($classLayout[0]); $j++){
-                            $curStudent = $classLayout[$i][$j];
-                            echo $curStudent["Gender"];
-                            if($j == sizeof($classLayout[0]) - 1)
-                                echo "<br>";
-                        }
                     }
                 }
             }
         }
     }
-
-    saveLayout($classLayout);
 }
 
 //function to shuffle 2-dimensional arrays
@@ -965,4 +758,51 @@ function saveLayout($arr){
     $conn->query($layoutQuery);
     return $serializedLayout;
 }
+?>
+<body>
+    <div>
+        <script>
+            function saveLayout() {
+                //redirect user to dashboard
+                document.location.href = 'myDashboard.php';
+            }
+            function backToForm() {
+                document.location.href = "generatechart.php";
+            }
+        </script>
+
+        <?php
+        //build string with the output in a table
+        $chartResult = "<table class=\"table table-bordered ".$row["ClassID"]."\">";
+
+        $numOfColumns = sizeof($classLayout[0]);
+        $numOfRows = sizeof($classLayout);
+        for ($row = $numOfRows - 1; $row > 0; $row--){
+            $chartResult .= "<tr>";
+            for($col = 0; $col < $numOfColumns; $col++){
+                $chartResult .= "<td><strong>".$classLayout[$row][$col]["FirstName"] . " " . $classLayout[$row][$col]["LastName"] . "</strong><br>" . $classLayout[$row][$col]["UserID"] . " (" . $classLayout[$row][$col]["Gender"] . ") </td>";
+            }
+            $chartResult .= "</tr>";
+        }
+        $chartResult .= "</table>";
+
+        echo $chartResult;
+
+        echo "<br><br>";
+
+        //button to save the output
+        echo "<form action = 'output.php' method = 'post'>";
+        echo "<button id = 'backButton' onclick = \"backToForm();\" type=\"button\" class=\"btn btn-primary\">Back</button>";
+        echo "<button id = 'saveButton' onclick = \"saveLayout();\" type=\"button\" class=\"btn btn-primary\" name = \"saveChart\">Save</button>";
+        echo "</form>";
+
+        if(isset($_POST["saveChart"])){
+            saveLayout($classLayout);
+        }
+        ?>
+    </div>
+</body>
+<?php
+require "includes".DIRECTORY_SEPARATOR."footer.php";
+?>
 

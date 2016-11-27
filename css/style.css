@@ -106,3 +106,7 @@ footer div p {
 footer {
     clear: both;
 }
+#saveButton {
+    text-align: center;
+    margin: 0 auto;
+}

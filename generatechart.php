@@ -6,9 +6,10 @@ require "includes/databaseConnection.php";
 ?>
     <body>
     <?php require "includes/menu.php"; ?>
-    <form id = "generateChartForm" action = "phpProcessing/processGenerateChart.php" method = "post">
+    <form id = "generateChartForm" action = "output.php" method = "post">
         <span class = "formLabel">Select a class: </span>
-        <select name="class">
+        <select name="class" required>
+            <option disabled selected value> - </option>
             <?php
             //populate this dropdown with the existing classes
             $selectClasses = "SELECT DISTINCT ClassID FROM Class;";
@@ -23,23 +24,23 @@ require "includes/databaseConnection.php";
             }
             ?>
         </select>
-        <br><br>
-        <span class = "formLabel">Select a term: </span>
-        <select name="term">
-            <?php
-            //populate this dropdown with the existing classes
-            $selectTerm = "SELECT DISTINCT Term FROM Class;";
-            $result = $conn->query($selectTerm);
-
-            if ($result->num_rows){
-                $optionsStr = "";
-                while($row = $result->fetch_assoc()) {
-                    $optionsStr.= "<option name = 'term' value = '".$row["Term"]."'>".$row["Term"]."</option>";
-                }
-                echo $optionsStr;
-            }
-            ?>
-        </select>
+<!--        <br><br>-->
+<!--        <span class = "formLabel">Select a term: </span>-->
+<!--        <select name="term">-->
+<!--            --><?php
+//            //populate this dropdown with the existing classes
+//            $selectTerm = "SELECT DISTINCT Term FROM Class;";
+//            $result = $conn->query($selectTerm);
+//
+//            if ($result->num_rows){
+//                $optionsStr = "";
+//                while($row = $result->fetch_assoc()) {
+//                    $optionsStr.= "<option name = 'term' value = '".$row["Term"]."'>".$row["Term"]."</option>";
+//                }
+//                echo $optionsStr;
+//            }
+//            ?>
+<!--        </select>-->
         <br><br>
         <span class = "formSection">Gender Pattern</span>
         <br><br>
