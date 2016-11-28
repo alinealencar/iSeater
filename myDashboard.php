@@ -4,6 +4,7 @@ $username = "Aline";
 require "includes".DIRECTORY_SEPARATOR."head.php";
 require "includes".DIRECTORY_SEPARATOR."menu.php";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
+
 ?>
 <body>
     <script>
@@ -53,7 +54,12 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
                     for ($row = 0; $row < $numOfRows; $row++){
                         $chartResult .= "<tr>";
                         for($col = 0; $col < $numOfColumns; $col++){
-                            $chartResult .= "<td><strong>".$layoutArr[$row][$col]["FirstName"] . " " . $layoutArr[$row][$col]["LastName"] . "</strong><br>" . $layoutArr[$row][$col]["UserID"] . " (" . $layoutArr[$row][$col]["Gender"] . ") </td>";
+                            if(!empty($layoutArr[$row][$col]["Gender"])) {
+                                $chartResult .= "<td><strong>".$layoutArr[$row][$col]["FirstName"] . " " . $layoutArr[$row][$col]["LastName"] . "</strong><br>" . $layoutArr[$row][$col]["UserID"] . " (" . $layoutArr[$row][$col]["Gender"] . ") </td>";
+                            }
+                            else{
+                                $chartResult .= "<td> - </td>";
+                            }
                         }
                         $chartResult .= "</tr>";
                     }

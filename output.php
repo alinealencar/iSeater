@@ -1,4 +1,5 @@
 <?php
+$title = "iSeater - Output";
 require "includes".DIRECTORY_SEPARATOR."head.php";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 
@@ -93,7 +94,7 @@ if(isset($_POST['generateChart']))
 
                     $classroomNoGenderIndex = 0;
                     //add the students to the $classLayout array
-                    for($rows = 0; $rows < sizeof($classLayout); $rows++){
+                    for($rows = sizeof($classLayout) - 1; $rows > 0 ; $rows--){
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                                 $classLayout[$rows][$col] = $classroomNoGender[$classroomNoGenderIndex];
                                 $classroomNoGenderIndex++;
@@ -203,7 +204,7 @@ if(isset($_POST['generateChart']))
                     //girls are going to be on the even columns and boys on the odd ones
                     $boysArrayIndex = 0;
                     $girlsArrayIndex = 0;
-                    for($rows = 0; $rows < sizeof($classLayout); $rows++){
+                    for($rows = sizeof($classLayout) - 1; $rows > 0; $rows--){
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                             if($col % 2 == 0){
                                 $classLayout[$rows][$col] = $genderSorted[1][$girlsArrayIndex];
@@ -319,7 +320,7 @@ if(isset($_POST['generateChart']))
                     //girls are going to be on the odd columns and boys on the even ones
                     $boysArrayIndex = 0;
                     $girlsArrayIndex = 0;
-                    for($rows = 0; $rows < sizeof($classLayout); $rows++){
+                    for($rows = sizeof($classLayout) - 1; $rows > 0; $rows--){
                         for($col = 0; $col < sizeof($classLayout[0]); $col++){
                             if($col % 2 == 0){
                                 $classLayout[$rows][$col] = $genderSorted[0][$boysArrayIndex];
@@ -623,6 +624,7 @@ if(isset($_POST['generateChart']))
                 }
             }
         }
+
     }
 }
 
@@ -749,17 +751,9 @@ function sortByStudentId($inputArray){
     return $inputArray;
 }
 
-function saveLayout($arr){
-    global $conn;
-    $selectedClass = $_POST['class'];
-    $serializedLayout = serialize($arr);
-    $layoutQuery = "UPDATE Class SET layout = '" . $serializedLayout . "' WHERE ClassID = '" . $selectedClass . "';";
-    $conn->query($layoutQuery);
-    return $serializedLayout;
-}
 ?>
 <body>
-
+<form action = 'savechart.php' method = 'post'>
 <?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
 
     <div>
@@ -779,10 +773,13 @@ function saveLayout($arr){
 
         $numOfColumns = sizeof($classLayout[0]);
         $numOfRows = sizeof($classLayout);
-        for ($row = $numOfRows - 1; $row > 0; $row--){
+        for ($row = 0; $row < $numOfRows; $row++){
             $chartResult .= "<tr>";
             for($col = 0; $col < $numOfColumns; $col++){
-                $chartResult .= "<td><strong>".$classLayout[$row][$col]["FirstName"] . " " . $classLayout[$row][$col]["LastName"] . "</strong><br>" . $classLayout[$row][$col]["UserID"] . " (" . $classLayout[$row][$col]["Gender"] . ") </td>";
+                if(!empty($classLayout[$row][$col]["Gender"]))
+                    $chartResult .= "<td><strong>".$classLayout[$row][$col]["FirstName"] . " " . $classLayout[$row][$col]["LastName"] . "</strong><br>" . $classLayout[$row][$col]["UserID"] . " (" . $classLayout[$row][$col]["Gender"] . ") </td>";
+                else
+                    $chartResult .= "<td> - </td>";
             }
             $chartResult .= "</tr>";
         }
@@ -792,16 +789,15 @@ function saveLayout($arr){
 
         echo "<br><br>";
 
-        //button to save the output
-        echo "<form action = 'output.php' method = 'post'>";
-        echo "<button id = 'backButton' onclick = \"backToForm();\" type=\"button\" class=\"btn btn-primary\">Back</button>";
-        echo "<button id = 'saveButton' onclick = \"saveLayout();\" type=\"button\" class=\"btn btn-primary\" name = \"saveChart\">Save</button>";
-        echo "</form>";
+        //serialize result array to send it to savechart
+        $serializedChart = serialize($classLayout);
 
-        if(isset($_POST["saveChart"])){
-            saveLayout($classLayout);
-        }
         ?>
+            <input type = "hidden" name = "classId" value = "<?php echo $_POST["class"] ?>"/>
+            <input type = "hidden" name = "saveChart" value = "<?php echo htmlentities($serializedChart); ?>"/>
+            <input id = 'backButton' onclick = "backToForm();" type="button" />
+            <input id = 'saveButton' onclick = "saveLayout();" type="submit" name = "saveButton" value = 'Save'/>
+        </form>
     </div>
 </body>
 <?php
