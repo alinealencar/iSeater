@@ -16,10 +16,34 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
                 //when the user clicks on the remove student button, the column appears
                 //when they click it again, the column is hidden
                 $(".checkboxColumn").toggle();
-            }
+            };
+
             $(function () {
                 $('[data-toggle="popover"]').popover()
-            })
+            });
+
+            $(document).ready(function () {
+                $('.ddlFilterTableRow').bind('change', function () {
+                    console.log("entrou na funcao");
+
+                    $('.ddlFilterTableRow').attr('disabled', 'disabled');
+                    $('#studentsTable').find('.studentRow').hide();
+
+                    var criteriaAttribute = '';
+
+                    $('.ddlFilterTableRow').each(function () {
+                        if ($(this).val() != '0') {
+                            criteriaAttribute += '[data-classId="' + $(this).val() + '"]';
+                        }
+                    });
+
+                    $('#studentsTable').find('.studentRow' + criteriaAttribute).show();
+
+                    $('.ddlFilterTableRow').removeAttr('disabled');
+
+                    //console.log(criteriaAttribute);
+                });
+            });
         </script>
         <br>
         <div class = "studentsListButtons" style="text-align: center;">
@@ -55,6 +79,7 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
                         <td>Class: </td>
                         <td>
                             <select name = "class" required>
+                                <option disabled selected value> - </option>
                                 <?php
                                 //populate this dropdown with the existing classes
                                 $selectClasses = "SELECT ClassID FROM Class;";
@@ -77,6 +102,22 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
             </form>
         </div>
         <br><br>
+        <select name = "class" class= "ddlFilterTableRow" required data-attribute = "classId">
+            <option selected value = "0"> Select All </option>
+            <?php
+            //populate this drop down with the existing classes
+            $selectClasses = "SELECT ClassID FROM Class;";
+            $result = $conn->query($selectClasses);
+
+            if ($result->num_rows){
+                $optionsStr = "";
+                while($row = $result->fetch_assoc()) {
+                    $optionsStr.= "<option value = '".$row["ClassID"]."'>".$row["ClassID"]."</option>";
+                }
+                echo $optionsStr;
+            }
+            ?>
+        </select>
 <?php
 $selectData = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID FROM IS_User_Class INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID";
 $result = $conn->query($selectData);
@@ -84,7 +125,7 @@ $result = $conn->query($selectData);
 $studentsTable = "";
 if ($result->num_rows) {
     //output data of each row
-    $studentsTable .= "<form id = 'deleteStudent' action = 'phpProcessing/deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable'>";
+    $studentsTable .= "<form id = 'deleteStudent' action = 'phpProcessing/deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable' id = 'studentsTable'>";
     $studentsTable .= "<tr>
                 <th style = 'display: none;' class = 'checkboxColumn'>
                     <span onclick = \"document.getElementById('deleteStudent').submit();\" class = 'glyphicon glyphicon-trash'></span>
@@ -96,7 +137,7 @@ if ($result->num_rows) {
                 <th>Class</th> 
                 </tr>";
     while($row = $result->fetch_assoc()) {
-        $studentsTable .= "<tr>";
+        $studentsTable .= "<tr class = 'studentRow' data-classId = '".$row["ClassID"]."'>";
         $studentsTable .= "<td style = 'display: none;' class = 'checkboxColumn'><input type = 'checkbox' name = 'checkbox[]' value = '".$row["UserID"]."'</td>";
         $studentsTable .= "<td>".$row["UserID"]."</td>";
         $studentsTable .= "<td>".$row["FirstName"]."</td>";
@@ -139,3 +180,4 @@ if(isset($_POST['addStudentSubmit']))
 //close connection
 $conn->close();
 ?>
+<a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>
