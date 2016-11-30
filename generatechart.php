@@ -110,6 +110,7 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
         <input name = "generateChart" class = "submitButton" type="submit" value="Generate Chart">
         <!--</div>-->
     </form>
+    <a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>
     </body>
 <?php
 require "includes".DIRECTORY_SEPARATOR."footer.php";

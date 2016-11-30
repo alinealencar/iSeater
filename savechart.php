@@ -15,3 +15,6 @@ function saveLayout($arr, $classid){
     $layoutQuery = "UPDATE Class SET Layout = '" . mysqli_real_escape_string($conn, $arr) . "' WHERE ClassID = '" . $classid . "';";
     $conn->query($layoutQuery);
 }
+?>
+
+<a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>
