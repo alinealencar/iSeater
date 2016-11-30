@@ -120,46 +120,16 @@ if(isset($_POST['generateChart']))
                     $boysArrayIndex = 0;
 
                     //Populate the empty $classLayout array with the students
-                    for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                        for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                            if($col % 2 == 0){
+                    for($row = sizeof($classLayout)-1; $row >= 0; $row--) {
+                        for ($col = 0; $col < sizeof($classLayout[0]); $col++) {
+                            if ($col % 2 == 0) {
                                 $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
                                 unset($girlsAlphabetically[$girlsArrayIndex]);
                                 $girlsArrayIndex++;
-                            }
-                            else {
+                            } else {
                                 $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
                                 unset($boysAlphabetically[$boysArrayIndex]);
                                 $boysArrayIndex++;
-                            }
-                        }
-                    }
-
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
-
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
                             }
                         }
                     }
@@ -188,34 +158,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
-
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
                 else if($order == "byidHorizontal"){
                     $boysById = sortByStudentId($genderSorted[0]);
@@ -238,34 +180,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
-
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
                 else if($order == "byidVertical"){
                     $boysById = sortByStudentId($genderSorted[0]);
@@ -288,34 +202,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
-
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
 
                 }
                 else if($order == "random"){
@@ -337,34 +223,7 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
 
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -397,34 +256,7 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
 
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
                 else if($order == "alphabeticalVertical"){
                     $boysByLastName = sortAlphabetically($genderSorted[0]);
@@ -447,34 +279,7 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
 
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
                 else if($order == "byidHorizontal"){
                     $boysById = sortByStudentId($genderSorted[0]);
@@ -497,34 +302,7 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
 
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
 
                 }
                 else if($order == "byidVertical"){
@@ -550,34 +328,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
-
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
                 else if($order == "random"){
                     //shuffle the students around the array to make sure the result is going to be truly random
@@ -598,34 +348,6 @@ if(isset($_POST['generateChart']))
                         }
                     }
 
-                    //if there's still students who don't have a seat, seat them on the next available seat
-                    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
-                    array_values($girlsAlphabetically);
-                    array_values($boysAlphabetically);
-
-                    if(sizeof($girlsAlphabetically) > 0){
-                        $girlsArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
-                                    $girlsArrayIndex++;
-                                }
-                            }
-                        }
-                    }
-
-                    if(sizeof($boysAlphabetically) > 0){
-                        $boysArrayIndex = 0;
-                        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
-                            for($col = 0; $col < sizeof($classLayout[0]); $col++){
-                                if($classLayout[$row][$col] == ""){
-                                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
-                                    $boysArrayIndex++;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -919,6 +641,34 @@ if(isset($_POST['generateChart']))
             }
         }
 
+    }
+
+    //if there's still students who don't have a seat, seat them on the next available seat
+    //in this way, the pattern will not be followed 100%, but the optimal chart will be reached
+    if(sizeof($girlsAlphabetically) > 0){
+        array_values($girlsAlphabetically);
+        $girlsArrayIndex = 0;
+        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                if($classLayout[$row][$col] == ""){
+                    $classLayout[$row][$col] = $girlsAlphabetically[$girlsArrayIndex];
+                    $girlsArrayIndex++;
+                }
+            }
+        }
+    }
+
+    if(sizeof($boysAlphabetically) > 0){
+        array_values($boysAlphabetically);
+        $boysArrayIndex = 0;
+        for($row = sizeof($classLayout)-1; $row >= 0; $row--){
+            for($col = 0; $col < sizeof($classLayout[0]); $col++){
+                if($classLayout[$row][$col] == ""){
+                    $classLayout[$row][$col] = $boysAlphabetically[$boysArrayIndex];
+                    $boysArrayIndex++;
+                }
+            }
+        }
     }
 }
 
