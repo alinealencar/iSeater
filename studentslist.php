@@ -102,8 +102,8 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
             </form>
         </div>
         <br><br>
-        <select name = "class" class= "ddlFilterTableRow" required data-attribute = "classId">
-            <option selected value = "0"> Select All </option>
+        <select name = "class" class= "ddlFilterTableRow" id = "filterClass" required data-attribute = "classId">
+            <option selected value = "0"> Filter By Class </option>
             <?php
             //populate this drop down with the existing classes
             $selectClasses = "SELECT ClassID FROM Class;";
