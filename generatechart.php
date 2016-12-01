@@ -1,4 +1,8 @@
 <?php
+session_start();
+require "includes".DIRECTORY_SEPARATOR."functions.php";
+hasAccess();
+
 $title = "iSeater - Generate Chart";
 $user = "Aline";
 require "includes".DIRECTORY_SEPARATOR."head.php";

@@ -110,3 +110,24 @@ footer {
     text-align: center;
     margin: 0 auto;
 }
+
+/*************** output.php ***********************/
+
+table.table{
+    width: 90%;
+    max-width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#backButton.btn{
+    margin: 0;
+    width: 10%;
+}
+#saveButton.btn{
+    margin: 0;
+    width: 10%;
+}
+div#chartButton{
+    margin-left: 45%;
+}

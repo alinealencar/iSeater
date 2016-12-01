@@ -813,7 +813,6 @@ function sortByStudentId($inputArray){
         <?php
         //build string with the output in a table
         $chartResult = "<table class=\"table table-bordered ".$row["ClassID"]."\">";
-
         $numOfColumns = sizeof($classLayout[0]);
         $numOfRows = sizeof($classLayout);
         for ($row = 0; $row < $numOfRows; $row++){
@@ -822,7 +821,7 @@ function sortByStudentId($inputArray){
                 if(!empty($classLayout[$row][$col]["Gender"]))
                     $chartResult .= "<td><strong>".$classLayout[$row][$col]["FirstName"] . " " . $classLayout[$row][$col]["LastName"] . "</strong><br>" . $classLayout[$row][$col]["UserID"] . " (" . $classLayout[$row][$col]["Gender"] . ") </td>";
                 else
-                    $chartResult .= "<td> - </td>";
+                    $chartResult .= "<td><pre>                  </pre></td>";
             }
             $chartResult .= "</tr>";
         }
@@ -838,8 +837,10 @@ function sortByStudentId($inputArray){
         ?>
             <input type = "hidden" name = "classId" value = "<?php echo $_POST["class"] ?>"/>
             <input type = "hidden" name = "saveChart" value = "<?php echo htmlentities($serializedChart); ?>"/>
-            <input id = 'backButton' onclick = "backToForm();" type="button" />
-            <input id = 'saveButton' onclick = "saveLayout();" type="submit" name = "saveButton" value = 'Save'/>
+            <div id="chartButton">
+            <input id = 'backButton' class="btn btn-info" onclick = "backToForm();" type="button" name="backButton" value="Back"/>
+            <input id = 'saveButton' class="btn btn-info" onclick = "saveLayout();" type="submit" name = "saveButton" value = 'Save'/>
+            </div>
         </form>
     </div>
 <a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>

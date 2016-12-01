@@ -1,9 +1,15 @@
 <?php
-$title = "iSeater - Dashboard";
-$username = "Aline";
+session_start();
+require "includes".DIRECTORY_SEPARATOR."functions.php";
+hasAccess();
+
+$title = "iSeater - My Dashboard";
 require "includes".DIRECTORY_SEPARATOR."head.php";
 require "includes".DIRECTORY_SEPARATOR."menu.php";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
+
+$title = "iSeater - Dashboard";
+$username = "Aline";
 ?>
 <body>
 <script>
@@ -23,7 +29,7 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
             $buttonsStr = "";
             if($result->num_rows){
                 while($row  = $result->fetch_assoc())
-                    $buttonsStr .= "<button onclick = \"showThisChart(this, '".$row["ClassID"]."')\" type='button' class='btn btn-info ".$row["ClassID"]."'>".$row["ClassID"]."</button><br><br><br>";
+                    $buttonsStr .= "<button onclick = \"showThisChart(this, '".$row["ClassID"]."')\" type='button' class='btn btn-info ".$row["ClassID"]."'>".$row["ClassID"]."</button><br><br>";
             }
             echo $buttonsStr;
             ?>
@@ -66,7 +72,6 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
         </div>
 </div>
 <div id="bottom"></div>
-<a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>
 </body>
 <?php require "includes".DIRECTORY_SEPARATOR."footer.php"?>
 </html>

@@ -1,4 +1,7 @@
 <?php
+session_start();
+require "includes".DIRECTORY_SEPARATOR."functions.php";
+hasAccess();
 
 $title = "iSeater - Students";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
