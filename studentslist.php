@@ -24,8 +24,6 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
 
             $(document).ready(function () {
                 $('.ddlFilterTableRow').bind('change', function () {
-                    console.log("entrou na funcao");
-
                     $('.ddlFilterTableRow').attr('disabled', 'disabled');
                     $('#studentsTable').find('.studentRow').hide();
 
@@ -41,10 +39,49 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
 
                     $('.ddlFilterTableRow').removeAttr('disabled');
 
-                    //console.log(criteriaAttribute);
                 });
             });
+
+            function validateForm(){
+                var studentId = document.forms["addStudent"]["studentId"];
+                var firstName = document.forms["addStudent"]["firstName"];
+                var lastName = document.forms["addStudent"]["lastName"];
+                var validName = /ˆ[a-zA-Z ]$/;
+                var validEntry = true;
+
+                if (firstName == "" || validName.test(firstName) == false){
+                    document.getElementById("invalidfName").show();
+                    validEntry = false;
+                }
+                if (lastName == "" || validName.test(lastName) == false){
+                    document.getElementById("invalidlName").show();
+                    validEntry = false;
+                }
+                if (studentId == "" || studentId.length != 6 || isNaN(studentId)){
+                    document.getElementById("invalidstudentId").show();
+                    validEntry = false;
+                }
+
+                if(validEntry){
+                    document.getElementsByName("addStudent").submit();
+                    location.reload();
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
         </script>
+        <br>
+        <div class="alert alert-danger" id = "invalidstudentId" style = "display: none; width: 60%; margin: 0 auto;">
+            <strong>Warning! </strong>Please enter a valid student ID. A student ID must be composed of 6 numeric characters.
+        </div>
+        <div class="alert alert-danger" id = "invalidfName" style = "display: none; width: 60%; margin: 0 auto;">
+            <strong>Warning! </strong>Please enter a valid first name.
+        </div>
+        <div class="alert alert-danger" id = "invalidlName" style = "display: none; width: 60%; margin: 0 auto;">
+            <strong>Warning! </strong>Please enter a valid last name.
+        </div>
         <br>
         <div class = "studentsListButtons" style="text-align: center;">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
@@ -53,7 +90,7 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
         <br>
 
         <div class = "addRemoveForm" style = "display: none;">
-            <form action = "studentslist.php" method = "post">
+            <form action = "" method = "post" onsubmit = "return validateForm();" name = "addStudent">
                 <p>Add Student</p>
                 <table>
                     <tr>
@@ -128,7 +165,7 @@ if ($result->num_rows) {
     $studentsTable .= "<form id = 'deleteStudent' action = 'phpProcessing/deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable' id = 'studentsTable'>";
     $studentsTable .= "<tr>
                 <th style = 'display: none;' class = 'checkboxColumn'>
-                    <span onclick = \"document.getElementById('deleteStudent').submit();\" class = 'glyphicon glyphicon-trash'></span>
+                    <span style = 'color: red;' onclick = \"document.getElementById('deleteStudent').submit();\" class = 'glyphicon glyphicon-trash'></span>
                 </th>
                 <th>ID</th>
                 <th>First Name</th>
@@ -165,15 +202,9 @@ if(isset($_POST['addStudentSubmit']))
     //query to add values into the Student table
     $addStudent = "INSERT INTO IS_User (UserID, FirstName, LastName, Gender, Role) VALUES (".$_POST['studentid'].",'".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','Student');";
     $addStudentClass = "INSERT INTO IS_User_Class(UserID, ClassID) VALUES (".$_POST['studentid'].", '".$_POST['class']."');";
-
-    echo $addStudentClass;
-    echo $addStudent;
     //run query
     $conn->query($addStudent);
     $conn->query($addStudentClass);
-
-    //reload the page after adding a student
-    header('Location: studentslist.php');
 
 }
 
