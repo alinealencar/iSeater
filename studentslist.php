@@ -8,7 +8,72 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 require "includes".DIRECTORY_SEPARATOR."head.php";
 ?>
     <body>
-    <?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
+    <?php
+    require "includes".DIRECTORY_SEPARATOR."menu.php";
+
+    /* ADD A STUDENT */
+    if(isset($_POST['addStudentSubmit']))
+    {
+        $validEntry = true;
+        //query to get all student ids
+        $allStudentIds = "SELECT UserId FROM IS_User";
+        $result = $conn->query($allStudentIds);
+
+        $studentIds = [];
+
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                //add all the students in the selected class into the $classroom array
+                $studentIds[] = $row;
+            }
+        }
+        //test if the studentId submitted already exists
+        for ($i = 0; $i < sizeof($studentIds); $i++){
+            if ($_POST['studentid'] == $studentIds[$i]['UserId']){
+                echo "<div class=\"alert alert-danger\" style = \"width: 60%; margin: 0 auto;\">
+                        <strong>Warning! </strong> This student ID is already registered.
+                      </div>";
+                $validEntry = false;
+                break;
+            }
+        }
+
+        if($validEntry) {
+            //query to add values into the Student table
+            $addStudent = "INSERT INTO IS_User (UserID, FirstName, LastName, Gender, Role) VALUES (".$_POST['studentid'].",'".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','Student');";
+            $addStudentClass = "INSERT INTO IS_User_Class(UserID, ClassID) VALUES (".$_POST['studentid'].", '".$_POST['class']."');";
+            //run query
+            $conn->query($addStudent);
+            $conn->query($addStudentClass);
+        }
+    }
+
+    /* DELETE A STUDENT */
+
+    if(isset($_POST['checkbox'])){
+        $studentsToDelete = $_POST['checkbox'];
+        for($i = 0; $i < sizeof($studentsToDelete); $i++){
+            $deleteFromUser_Class = "DELETE FROM IS_User_Class WHERE UserID = ".$studentsToDelete[$i].";";
+            $result = $conn->query($deleteFromUser_Class);
+
+            $deleteFromIs_User = "DELETE FROM IS_User WHERE UserID = ".$studentsToDelete[$i].";";
+            $result = $conn->query($deleteFromIs_User);
+
+        }
+        if(sizeof($studentsToDelete) > 1){
+            echo "<div class=\"alert alert-success\" style = \"width: 60%; margin: 0 auto;\">
+                        <strong>Success! </strong> These students were successfully deleted.
+                  </div>";
+        }
+        else {
+            echo "<div class=\"alert alert-success\" style = \"width: 60%; margin: 0 auto;\">
+                        <strong>Success! </strong> This student was successfully deleted.
+                  </div>";
+        }
+
+    }
+
+    ?>
         <script>
             function showForm() {
                 $(".addRemoveForm").toggle();
@@ -44,38 +109,11 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
 
                 });
             });
-
-            function validateForm(){
-                var studentId = document.forms["addStudent"]["studentId"];
-                var firstName = document.forms["addStudent"]["firstName"];
-                var lastName = document.forms["addStudent"]["lastName"];
-                var validName = /ˆ[a-zA-Z ]$/;
-                var validEntry = true;
-
-                if (firstName == "" || validName.test(firstName) == false){
-                    document.getElementById("invalidfName").show();
-                    validEntry = false;
-                }
-                if (lastName == "" || validName.test(lastName) == false){
-                    document.getElementById("invalidlName").show();
-                    validEntry = false;
-                }
-                if (studentId == "" || studentId.length != 6 || isNaN(studentId)){
-                    document.getElementById("invalidstudentId").show();
-                    validEntry = false;
-                }
-
-                if(validEntry){
-                    document.getElementsByName("addStudent").submit();
-                    location.reload();
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
         </script>
         <br>
+        <div class="alert alert-success" id = "studentAddedAlert" style = "display: none; width: 60%; margin: 0 auto;">
+            <strong>Success! </strong> This student was successfully registered.
+        </div>
         <div class="alert alert-danger" id = "invalidstudentId" style = "display: none; width: 60%; margin: 0 auto;">
             <strong>Warning! </strong>Please enter a valid student ID. A student ID must be composed of 6 numeric characters.
         </div>
@@ -88,13 +126,12 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
         <br>
         <div class = "studentsListButtons" style="text-align: center;">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
-            <button onclick = "removeStudent()" type="button" class="btn btn-danger">Remove Student</button>
+            <button onclick = "removeStudent()" type="button" class="btn btn-danger">Delete Student</button>
         </div>
         <br>
 
         <div class = "addRemoveForm" style = "display: none;">
-            <form action = "" method = "post" onsubmit = "return validateForm();" name = "addStudent">
-                <p>Add Student</p>
+            <form method = "post" name = "addStudent" id = "formToAddStudent">
                 <table>
                     <tr>
                         <td>Student ID: </td>
@@ -138,7 +175,8 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
                     </tr>
                 </table>
                 <br>
-                <input name = "addStudentSubmit" type = "submit" value = "Add Student">
+                <input type = "button" value = "Add Student" onclick = "validateForm()">
+                <input name = "addStudentSubmit" id = "submitBtn" type = "submit" style = "display:none;">
             </form>
         </div>
         <br><br>
@@ -165,7 +203,7 @@ $result = $conn->query($selectData);
 $studentsTable = "";
 if ($result->num_rows) {
     //output data of each row
-    $studentsTable .= "<form id = 'deleteStudent' action = 'phpProcessing/deleteStudent.php' method = 'post'><table class = 'table table-striped studentsList sortable' id = 'studentsTable'>";
+    $studentsTable .= "<form id = 'deleteStudent' action = '' method = 'post'><table class = 'table table-striped studentsList sortable' id = 'studentsTable'>";
     $studentsTable .= "<tr>
                 <th style = 'display: none;' class = 'checkboxColumn'>
                     <span style = 'color: red;' onclick = \"document.getElementById('deleteStudent').submit();\" class = 'glyphicon glyphicon-trash'></span>
@@ -194,23 +232,44 @@ else {
     echo "0 results";
 }
 ?>
+    <script>
+        function validateForm(){
+            console.log("validating");
+            $(".alert").hide();
+
+            var studentId = document.forms["addStudent"]["studentid"].value;
+            var firstName = document.forms["addStudent"]["firstName"].value;
+            var lastName = document.forms["addStudent"]["lastName"].value;
+            var validNameRegEx = /^[a-zA-Z ]{2,30}$/;
+            var validEntry = true;
+
+            if (firstName === "" || validNameRegEx.test(firstName) === false){
+                $("#invalidfName").show();
+                validEntry = false;
+            }
+            if (lastName === "" || validNameRegEx.test(lastName) === false){
+                $("#invalidlName").show();
+                validEntry = false;
+            }
+            if (studentId === "" || studentId.length !== 6 || isNaN(studentId)){
+                $("#invalidstudentId").show();
+                validEntry = false;
+            }
+
+            if(validEntry){
+                $(" #submitBtn").click();
+                setTimeout($("#studentAddedAlert").show(), 20000);
+                //location.reload();
+                return true;
+            } else {
+                console.log("form invalido");
+                return false;
+            }
+        }
+    </script>
     </body>
 <?php
 require "includes".DIRECTORY_SEPARATOR."footer.php";
-
-
-//form processing
-if(isset($_POST['addStudentSubmit']))
-{
-    //query to add values into the Student table
-    $addStudent = "INSERT INTO IS_User (UserID, FirstName, LastName, Gender, Role) VALUES (".$_POST['studentid'].",'".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['gender']."','Student');";
-    $addStudentClass = "INSERT INTO IS_User_Class(UserID, ClassID) VALUES (".$_POST['studentid'].", '".$_POST['class']."');";
-    //run query
-    $conn->query($addStudent);
-    $conn->query($addStudentClass);
-
-}
-
 //close connection
 $conn->close();
 ?>
