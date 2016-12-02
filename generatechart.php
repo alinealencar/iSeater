@@ -10,7 +10,8 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 ?>
     <body>
     <?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
-    <form id = "generateChartForm" action = "output.php" method = "post">
+    <div  id = "generateChartForm">
+    <form action = "output.php" method = "post">
         <span class = "formLabel">Select a class: </span>
         <select name="class" required>
             <option disabled selected value> - </option>
@@ -45,58 +46,58 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 //            }
 //            ?>
 <!--        </select>-->
-        <br><br>
+        <br><br><br>
         <span class = "formSection">Gender Pattern</span>
-        <br><br>
+        <br><br><br>
         <div class = "genderGroup">
             <div class = "genderBox">
                 <div class = "gender"><img alt="no gender" src="images/nogenderf.png"></div><br>
-                <span class = "genderSelection">No Restriction</span><br>
+                <span class = "formLabel">No Restriction</span><br>
                 <input type="radio" name="gender" value="nogender" checked>
             </div>
             <div class = "genderBox">
                 <div class = "gender"><img alt="Girls - Boys" src="images/girlboyf.png"></div><br>
-                <span class = "genderSelection">Girls - Boys</span><br>
+                <span class = "formLabel">Girls - Boys</span><br>
                 <input type="radio" name="gender" value="girlsboys" checked>
             </div>
             <div class = "genderBox">
                 <div class = "gender"><img alt="Boys - Girls" src="images/boygirlf.png"></div><br>
-                <span class = "genderSelection">Boys - Girls</span><br>
+                <span class = "formLabel">Boys - Girls</span><br>
                 <input type="radio" name="gender" value="boysgirls" checked>
             </div>
             <div class = "genderBox">
                 <div class = "gender"><img alt="alternated" src="images/everyotherf.png"></div><br>
-                <span class = "genderSelection">Alternated</span><br>
+                <span class = "formLabel">Alternated</span><br>
                 <input type="radio" name="gender" value="alternated" checked>
             </div>
         </div>
-        <br><br><br><br><br>
+        <br><br><br>
         <span class = "formSection">Order</span>
         <br><br>
         <div class = "orderGroup">
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/alphabeticalhorizontalf.png"></div><br>
-                <span class = "genderSelection">Alphabetical Order<br>(Horizontal)</span><br>
+                <span class = "formLabel">Alphabetical Order<br>(Horizontal)</span><br>
                 <input type="radio" name="order" value="alphabeticalHorizontal" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical vertical" src="images/alphabeticalverticalf.png"></div><br>
-                <span class = "genderSelection">Alphabetical Order<br>(Vertical)</span><br>
+                <span class = "formLabel">Alphabetical Order<br>(Vertical)</span><br>
                 <input type="radio" name="order" value="alphabeticalVertical" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="id horizontal" src="images/idhorizontalf.png"></div><br>
-                <span class = "genderSelection">ID Order<br>(Horizontal)</span><br>
+                <span class = "formLabel">ID Order<br>(Horizontal)</span><br>
                 <input type="radio" name="order" value="byidHorizontal" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/idverticalf.png"></div><br>
-                <span class = "genderSelection">ID Order<br>(Vertical)</span><br>
+                <span class = "formLabel">ID Order<br>(Vertical)</span><br>
                 <input type="radio" name="order" value="byidVertical" checked>
             </div>
             <div class="orderBox">
                 <div class = "order"><img alt="alphabetical horizontal" src="images/randomf.png"></div><br>
-                <span class = "genderSelection">Random Order<br></span><br>
+                <span class = "formLabel">Random Order<br></span><br>
                 <input type="radio" name="order" value="random" checked>
             </div>
 
@@ -114,6 +115,7 @@ require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
         <input name = "generateChart" class = "submitButton" type="submit" value="Generate Chart">
         <!--</div>-->
     </form>
+    </div>
     <a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>
     </body>
 <?php

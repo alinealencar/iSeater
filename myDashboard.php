@@ -43,28 +43,29 @@ $username = "Aline";
             if($result->num_rows) {
                 while($row = $result->fetch_assoc()){
                     $chartResult .= "<div class = 'titleBar ".$row['ClassID']."' style = 'display:none;'><hr>";
-                    $chartResult .= "<span>Class ID: " . $row['ClassID'] . " | Class Name: " . $row['ClassName'] . " | Term: " . $row['Term'] . '</span><br>';
+                    $chartResult .= "<span>Class ID: " . $row['ClassID'] . " | Class Name: " . $row['ClassName'] .'</span><br>';
                     $chartResult .= "<hr></div>";
                     $serializedData = $row['Layout'];
                     $layoutArr = unserialize($row['Layout']);
-                    $chartResult .= "<div class = 'chartTable'>";
-                    $chartResult .= "<table class=\"table table-bordered ".$row["ClassID"]."\" style = 'display: none;'>";
+                    //$chartResult .= "<div>";
+                    $chartResult .= "<table id = 'dashboardTable' class=\"table table-bordered ".$row["ClassID"]."\" style = 'display: none;'>";
                     $numOfColumns = sizeof($layoutArr[0]);
                     $numOfRows = sizeof($layoutArr);
                     for ($row = 0; $row < $numOfRows; $row++){
                         $chartResult .= "<tr>";
                         for($col = 0; $col < $numOfColumns; $col++){
                             if(!empty($layoutArr[$row][$col]["Gender"])) {
-                                $chartResult .= "<td><strong>".$layoutArr[$row][$col]["FirstName"] . " " . $layoutArr[$row][$col]["LastName"] . "</strong><br>" . $layoutArr[$row][$col]["UserID"] . " (" . $layoutArr[$row][$col]["Gender"] . ") </td>";
+                                $chartResult .= "<td><span class = 'studentNameBold'>".$layoutArr[$row][$col]["FirstName"] . " " . $layoutArr[$row][$col]["LastName"] . "</span><br>" . $layoutArr[$row][$col]["UserID"] . " (" . $layoutArr[$row][$col]["Gender"] . ") </td>";
                             }
                             else{
-                                $chartResult .= "<td> - </td>";
+                                $chartResult .= "<td><pre>             </pre></td>";
                             }
                         }
                         $chartResult .= "</tr>";
                     }
+                    $chartResult .= "<tr><td id = 'blackboard' colspan = '".$numOfColumns."'><strong>BLACKBOARD</strong></td></tr>";
                     $chartResult .= "</table>";
-                    $chartResult .= "</div>";
+                    //$chartResult .= "</div>";
                 }
                 echo $chartResult;
             }

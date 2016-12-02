@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "iSeater - Output";
 require "includes".DIRECTORY_SEPARATOR."head.php";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
@@ -821,10 +822,11 @@ function sortByStudentId($inputArray){
                 if(!empty($classLayout[$row][$col]["Gender"]))
                     $chartResult .= "<td><strong>".$classLayout[$row][$col]["FirstName"] . " " . $classLayout[$row][$col]["LastName"] . "</strong><br>" . $classLayout[$row][$col]["UserID"] . " (" . $classLayout[$row][$col]["Gender"] . ") </td>";
                 else
-                    $chartResult .= "<td><pre>                  </pre></td>";
+                    $chartResult .= "<td><pre>        </pre></td>";
             }
             $chartResult .= "</tr>";
         }
+        $chartResult .= "<tr><td id = 'blackboard' colspan = '".$numOfColumns."'><strong>BLACKBOARD</strong></td></tr>";
         $chartResult .= "</table>";
 
         echo $chartResult;

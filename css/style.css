@@ -120,6 +120,13 @@ table.table{
     margin-top: 5%;
 }
 
+#dashboardTable {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 2%;
+    margin-top: 3%;
+    max-height: 100%;
+}
 #backButton.btn{
     margin: 0;
     width: 10%;
@@ -130,4 +137,43 @@ table.table{
 }
 div#chartButton{
     margin-left: 45%;
+}
+#blackboard {
+    text-align: center;
+
+}
+table {
+    font-family: 'Raleway', sans-serif;
+    font-size: 100%;
+}
+.studentNameBold {
+    font-weight: bolder;
+}
+#filterClass {
+    display: block;
+    margin: 0 auto;
+}
+.container {
+    margin: auto;
+    text-align: center;
+}
+.addRemoveForm{
+    text-align: center;
+    margin: 0 auto;
+    width: 20%;
+}
+.addRemoveForm td{
+    padding: 3% 0;
+}
+.titleBar {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 120%;
+}
+#classesDashboard {
+    font-family: 'Raleway', sans-serif;
+    font-size: 150%;
+}
+.studentsList{
+    width: 80%;
+    margin: 0 auto;
 }

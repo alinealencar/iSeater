@@ -13,32 +13,8 @@
     color: #444;
 }
 .formLabel{
-    font-size: 130%;
-}
-.layout {
-    background-color: #eee;
-    border: 1px solid #444;
-    font-family: 'Baloo Paaji', cursive;
-    color: #444;
-    font-size: 150%;
-    line-height: 230%;
-    box-shadow: 5px 5px 5px #aaa;
-}
-.layoutBox{
-    display: inline-block;
-    vertical-align:center;
-    width: 25%;
-    padding: 0 5%;
-}
-.layoutGroup {
-    max-width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-.formLabel {
-    color: #444;
-    font-family: 'Helvetica', sans-serif;
-    padding: 2%;
+    font-family: 'Raleway', sans-serif;
+    font-size: 120%;
 }
 .genderGroup, .orderGroup{
     max-width: 100%;
@@ -54,17 +30,16 @@
     padding: 0 0%;
     width: 18%
 }
-.genderBox img, .orderBox img {
-    width: 77%;
+.orderGroup img, .genderGroup img {
+    width: auto;
     height: 20%;
-    /*max-width: 100%;*/
     box-shadow: 5px 5px 5px #aaa;
 }
-.genderSelection {
-    font-family: "Helvetica", sans-serif;
-    font-size: 100%;
-    color: #444;
-}
+/*.genderBox img, .orderBox img {
+    width: 77%;
+    height: 20%;
+    box-shadow: 5px 5px 5px #aaa;
+}*/
 .submitButton:hover {
     background-color: #4dd7fa;
 }

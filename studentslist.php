@@ -76,6 +76,7 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
     ?>
         <script>
             function showForm() {
+                $(".alert").hide();
                 $(".addRemoveForm").toggle();
             };
 
@@ -130,23 +131,23 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
         </div>
         <br>
 
-        <div class = "addRemoveForm" style = "display: none;">
+        <div class = "addRemoveForm center" style = "display: none;">
             <form method = "post" name = "addStudent" id = "formToAddStudent">
                 <table>
                     <tr>
-                        <td>Student ID: </td>
+                        <td>Student ID:&nbsp;&nbsp;</td>
                         <td><input type = "text" name = "studentid" required></td>
                     </tr>
                     <tr>
-                        <td>First Name: </td>
+                        <td>First Name:&nbsp;&nbsp;</td>
                         <td><input type = "text" name = "firstName" required></td>
                     </tr>
                     <tr>
-                        <td>Last Name: </td>
+                        <td>Last Name:&nbsp;&nbsp;</td>
                         <td><input type = "text" name = "lastName" required></td>
                     </tr>
                     <tr>
-                        <td>Gender: </td>
+                        <td>Gender:&nbsp;&nbsp;</td>
                         <td>
                             <input type = "radio" name = "gender" value = "M" required> M
                             <input type = "radio" name = "gender" value = "F"> F
@@ -175,11 +176,12 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
                     </tr>
                 </table>
                 <br>
-                <input type = "button" value = "Add Student" onclick = "validateForm()">
+                <input class = ".btn btn-info" type = "button" value = "Add Student" onclick = "validateForm()">
                 <input name = "addStudentSubmit" id = "submitBtn" type = "submit" style = "display:none;">
             </form>
         </div>
         <br><br>
+    <div class = "container">
         <select name = "class" class= "ddlFilterTableRow" id = "filterClass" required data-attribute = "classId">
             <option selected value = "0"> Filter By Class </option>
             <?php
@@ -196,6 +198,7 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
             }
             ?>
         </select>
+    </div>
 <?php
 $selectData = "SELECT IS_User.UserID, IS_User.FirstName, IS_User.LastName, IS_User.Gender, IS_User_Class.ClassID FROM IS_User_Class INNER JOIN IS_User ON IS_User_Class.UserID = IS_User.UserID";
 $result = $conn->query($selectData);
