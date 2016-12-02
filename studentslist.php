@@ -254,10 +254,6 @@ else {
             var validNameRegEx = /^[a-zA-Z ]{2,30}$/;
             var validEntry = true;
 
-            console.log("type of gender is " + typeof gender);
-            console.log("value of gender is " + gender);
-
-
             if (firstName === "" || validNameRegEx.test(firstName) === false){
                 $("#invalidfName").show();
                 validEntry = false;
@@ -274,7 +270,7 @@ else {
                 $("#invalidClass").show();
                 validEntry = false;
             }
-            if(gender !== "M" || gender !== "F"){
+            if(gender === "" || gender === undefined || gender === null){
                 $("#invalidGender").show();
                 validEntry = false;
             }
