@@ -5,13 +5,13 @@ hasAccess();
 
 $title = "iSeater - My Dashboard";
 require "includes".DIRECTORY_SEPARATOR."head.php";
-require "includes".DIRECTORY_SEPARATOR."menu.php";
 require "includes".DIRECTORY_SEPARATOR."databaseConnection.php";
 
 $title = "iSeater - Dashboard";
 $username = "Aline";
 ?>
 <body>
+<?php require "includes".DIRECTORY_SEPARATOR."menu.php"; ?>
 <script>
     function showThisChart(obj, className){
         $("table").hide();
@@ -21,7 +21,7 @@ $username = "Aline";
 </script>
 <div class = "container">
         <div class = ".col-md-5" id="left"><br>
-            <h3> Classes: </h3>
+            <h3 id = "classesDashboard"> Classes: </h3>
             <br>
             <?php
             $query = 'SELECT ClassID FROM Class';
