@@ -73,6 +73,7 @@ $username = "Aline";
         </div>
 </div>
 <div id="bottom"></div>
+<a href="/folder_view/vs.php?s=<?php echo __FILE__?>" target="_blank">View Source</a>
 </body>
 <?php require "includes".DIRECTORY_SEPARATOR."footer.php"?>
 </html>

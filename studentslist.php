@@ -124,6 +124,12 @@ require "includes".DIRECTORY_SEPARATOR."head.php";
         <div class="alert alert-danger" id = "invalidlName" style = "display: none; width: 60%; margin: 0 auto;">
             <strong>Warning! </strong>Please enter a valid last name.
         </div>
+        <div class="alert alert-danger" id = "invalidGender" style = "display: none; width: 60%; margin: 0 auto;">
+            <strong>Warning! </strong>Please choose a gender.
+        </div>
+        <div class="alert alert-danger" id = "invalidClass" style = "display: none; width: 60%; margin: 0 auto;">
+            <strong>Warning! </strong>Please choose a class.
+        </div>
         <br>
         <div class = "studentsListButtons" style="text-align: center;">
             <button onclick = "showForm('addStudent')" type="button" class="btn btn-success">Add Student</button>
@@ -243,8 +249,14 @@ else {
             var studentId = document.forms["addStudent"]["studentid"].value;
             var firstName = document.forms["addStudent"]["firstName"].value;
             var lastName = document.forms["addStudent"]["lastName"].value;
+            var gender = document.forms["addStudent"]["gender"].value;
+            var classId = document.forms["addStudent"]["class"].selectedIndex;
             var validNameRegEx = /^[a-zA-Z ]{2,30}$/;
             var validEntry = true;
+
+            console.log("type of gender is " + typeof gender);
+            console.log("value of gender is " + gender);
+
 
             if (firstName === "" || validNameRegEx.test(firstName) === false){
                 $("#invalidfName").show();
@@ -258,14 +270,20 @@ else {
                 $("#invalidstudentId").show();
                 validEntry = false;
             }
+            if(classId === 0){
+                $("#invalidClass").show();
+                validEntry = false;
+            }
+            if(gender !== "M" || gender !== "F"){
+                $("#invalidGender").show();
+                validEntry = false;
+            }
 
             if(validEntry){
                 $(" #submitBtn").click();
                 setTimeout($("#studentAddedAlert").show(), 20000);
-                //location.reload();
                 return true;
             } else {
-                console.log("form invalido");
                 return false;
             }
         }
